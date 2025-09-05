@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Free Fire - GamesNow</title>
+    <link rel="icon" href="https://reygenteng.github.io/gamesku/gamesnow.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            padding-bottom: 80px;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            height: 30px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icons img {
+            width: 24px;
+            cursor: pointer;
+        }
+        
+        .header-icons .btn-masuk {
+            padding: 8px 15px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .breadcrumbs {
+            padding: 15px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: #888;
+        }
+
+        .game-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .game-info img {
+            width: 60px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .game-info h2 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .game-info p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #ff4500;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            background-color: #fff;
+        }
+        
+        .tab-item {
+            flex-grow: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-item.active {
+            color: #ff4500;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #ff4500;
+        }
+        
+        .content-tab {
+            display: none;
+        }
+        
+        .content-tab.active {
+            display: block;
+        }
+
+        .step-section {
+            padding: 15px;
+        }
+
+        .step-section h3 {
+            font-size: 1em;
+            color: #ff4500;
+            margin-bottom: 10px;
+        }
+
+        .step-section h3 span {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .info-bar {
+            background-color: #ffedf0;
+            color: #ff4500;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-buttons a {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .filter-buttons a.active {
+            background-color: #ff4500;
+            color: white;
+            border-color: #ff4500;
+        }
+        
+        .nominal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .nominal-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .nominal-item.selected {
+            border: 2px solid #ff4500;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
+        }
+
+        .nominal-item h4 {
+            margin: 0;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nominal-item h4 img {
+            width: 20px;
+        }
+
+        .nominal-item p {
+            margin: 5px 0 0;
+            font-size: 1em;
+            font-weight: bold;
+            color: #ff4500;
+        }
+
+        .price-note {
+            font-size: 0.7em;
+            color: #888;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+        
+        .discount-tag {
+            background-color: #ff4500;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.6em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .form-section {
+            background-color: #fff;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-section h3 {
+            font-size: 1.1em;
+            color: #ff4500;
+            margin-bottom: 10px;
+        }
+
+        .form-section input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .payment-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .payment-item.selected {
+            border: 2px solid #ff4500;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
+        }
+
+        .payment-item .info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-item img {
+            height: 24px;
+        }
+
+        .payment-item .price {
+            font-weight: bold;
+        }
+        
+        .sticky-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .sticky-footer .price-info h4 {
+            font-size: 1em;
+            color: #ff4500;
+            margin: 0;
+        }
+        
+        .sticky-footer .price-info p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .sticky-footer .btn-beli {
+            padding: 12px 25px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://reygenteng.github.io/gamesku/gamesnow.png" alt="GamesNow Logo" class="logo">
+        <div class="header-icons">
+            <img src="https://api.iconify.design/ic:baseline-search.svg" alt="Search">
+            <img src="https://api.iconify.design/ic:baseline-account-circle.svg" alt="Akun">
+            <button class="btn-masuk">Masuk</button>
+        </div>
+    </header>
+
+    <div class="breadcrumbs">
+        <a href="index.html">Home</a> / Top Up FF (Free Fire)
+    </div>
+
+    <div class="game-info">
+        <img src="https://reygenteng.github.io/gamesku/ff.png" alt="Free Fire Logo">
+        <div>
+            <p>TOP UP</p>
+            <h2>Top Up FF (Free Fire)</h2>
+            <p style="color:#888; font-size:0.8em;">Lihat cara transaksi</p>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-item active" data-tab="pembelian">Pembelian</div>
+        <div class="tab-item" data-tab="gift-voucher">Gift Voucher</div>
+    </div>
+
+    <main>
+        <div id="pembelian-content" class="content-tab active">
+            <div class="step-section">
+                <h3><span>1</span> Pilih nominal</h3>
+                <div class="info-bar">⚡ 42.867 item dibeli hari ini!</div>
+
+                <div class="filter-buttons">
+                    <a href="#" data-filter="all" class="active">Semua Diamond</a>
+                    <a href="#" data-filter="termurah">Pasti Termurah!</a>
+                    <a href="#" data-filter="membership">Membership</a>
+                </div>
+
+                <div class="nominal-grid">
+                    <div class="nominal-item" data-price="886" data-original-price="1499" data-diamonds="5" data-category="termurah">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 5 Diamonds</h4>
+                        <p>Rp886<span class="price-note">Rp1.499</span><span class="discount-tag">41%</span></p>
+                    </div>
+                    <div class="nominal-item" data-price="1897" data-diamonds="10" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 10 Diamonds</h4>
+                        <p>Rp1.897</p>
+                    </div>
+                    <div class="nominal-item" data-price="1988" data-original-price="2259" data-diamonds="12" data-category="termurah">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 12 Diamonds</h4>
+                        <p>Rp1.988<span class="price-note">Rp2.259</span><span class="discount-tag">12%</span></p>
+                    </div>
+                    <div class="nominal-item" data-price="3728" data-diamonds="20" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 20 Diamonds</h4>
+                        <p>Rp3.728</p>
+                    </div>
+                    <div class="nominal-item" data-price="4764" data-diamonds="25" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 25 Diamonds</h4>
+                        <p>Rp4.764</p>
+                    </div>
+                    <div class="nominal-item" data-price="5654" data-diamonds="30" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 30 Diamonds</h4>
+                        <p>Rp5.654</p>
+                    </div>
+                    <div class="nominal-item" data-price="8753" data-diamonds="55" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 55 Diamonds</h4>
+                        <p>Rp8.753</p>
+                    </div>
+                    <div class="nominal-item" data-price="12743" data-diamonds="80" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 80 Diamonds</h4>
+                        <p>Rp12.743</p>
+                    </div>
+                    <div class="nominal-item" data-price="15327" data-diamonds="100" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 100 Diamonds</h4>
+                        <p>Rp15.327</p>
+                    </div>
+                    <div class="nominal-item" data-price="18744" data-diamonds="120" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 120 Diamonds</h4>
+                        <p>Rp18.744</p>
+                    </div>
+                    <div class="nominal-item" data-price="20624" data-diamonds="130" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 130 Diamonds</h4>
+                        <p>Rp20.624</p>
+                    </div>
+                    <div class="nominal-item" data-price="43899" data-diamonds="355" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 355 Diamonds</h4>
+                        <p>Rp43.899</p>
+                    </div>
+                    <div class="nominal-item" data-price="44000" data-diamonds="346" data-category="all">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> 346 Diamonds</h4>
+                        <p>Rp44.000</p>
+                    </div>
+                    <div class="nominal-item" data-price="29000" data-diamonds="Weekly Membership" data-category="membership">
+                        <h4><img src="https://api.iconify.design/game-icons:diamond.svg" alt="Diamond Icon"> Weekly Membership</h4>
+                        <p>Rp29.000</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-section form-section">
+                <h3><span>2</span> Masukkan jumlah pembelian</h3>
+                <input type="number" value="1">
+            </div>
+
+            <div class="step-section form-section">
+                <h3><span>3</span> Pilih metode bayar</h3>
+                <div class="payment-grid">
+                    <div class="payment-item" data-name="DANA">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/DANA.png" alt="DANA Logo">
+                            <span>DANA</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="GoPay">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/GOPAY.png" alt="Gopay Logo">
+                            <span>GoPay</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="OVO">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/OVO.png" alt="OVO Logo">
+                            <span>OVO</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="QRIS">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/QRIS.png" alt="QRIS Logo">
+                            <span>QRIS</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="ShopeePay">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/SHOPEEPAY.png" alt="ShopeePay Logo">
+                            <span>ShopeePay</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-section form-section">
+                <h3><span>4</span> Masukkan detail akun</h3>
+                <input type="text" placeholder="Masukkan User ID">
+            </div>
+
+            <div class="step-section form-section">
+                <h3><span>5</span> Masukkan info kontak</h3>
+                <input type="email" placeholder="Masukkan email (opsional)">
+            </div>
+            
+            <div class="step-section form-section">
+                <h3><span>6</span> Punya kode promo?</h3>
+                <input type="text" placeholder="Masukkan kode promo">
+            </div>
+        </div>
+
+        <div id="gift-voucher-content" class="content-tab">
+            <div class="step-section" style="text-align:center;">
+                <h3>Maaf, halaman ini belum tersedia.</h3>
+                <p>Silakan kembali ke tab Pembelian.</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="sticky-footer">
+        <div class="price-info">
+            <h4>Rp<span id="finalPrice">0</span></h4>
+            <p><span id="finalDiamonds">0</span> Diamonds, <span id="finalPayment"></span></p>
+        </div>
+        <a href="#" class="btn-beli">Beli Sekarang</a>
+    </div>
+
+    <script>
+        const nominalItems = document.querySelectorAll('.nominal-item');
+        const paymentItems = document.querySelectorAll('.payment-item');
+        const finalPriceElement = document.getElementById('finalPrice');
+        const finalDiamondsElement = document.getElementById('finalDiamonds');
+        const finalPaymentElement = document.getElementById('finalPayment');
+        const tabItems = document.querySelectorAll('.tab-item');
+        const filterButtons = document.querySelectorAll('.filter-buttons a');
+        
+        let selectedNominal = null;
+        let selectedPayment = null;
+
+        // --- Fungsi untuk Tab ---
+        tabItems.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabItems.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-tab').forEach(c => c.classList.remove('active'));
+
+                const tabId = tab.dataset.tab;
+                tab.classList.add('active');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+
+        // --- Fungsi untuk Filter ---
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+                nominalItems.forEach(item => {
+                    const categories = item.dataset.category;
+                    if (filter === 'all' || categories.includes(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- Fungsi untuk Nominal & Pembayaran ---
+        nominalItems.forEach(item => {
+            item.addEventListener('click', () => {
+                nominalItems.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+                
+                selectedNominal = item;
+                updateFooter();
+            });
+        });
+
+        paymentItems.forEach(item => {
+            item.addEventListener('click', () => {
+                paymentItems.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+
+                selectedPayment = item;
+                updateFooter();
+            });
+        });
+
+        function updateFooter() {
+            if (selectedNominal && selectedPayment) {
+                const price = parseInt(selectedNominal.dataset.price);
+                const diamonds = selectedNominal.dataset.diamonds;
+                const payment = selectedPayment.dataset.name;
+            
+                finalPriceElement.textContent = price.toLocaleString('id-ID');
+                finalDiamondsElement.textContent = diamonds;
+                finalPaymentElement.textContent = payment;
+                
+                document.querySelector('.sticky-footer').style.display = 'flex';
+            } else {
+                document.querySelector('.sticky-footer').style.display = 'none';
+            }
+        }
+        
+        document.querySelector('.sticky-footer').style.display = 'none';
+    </script>
+</body>
+</html>
