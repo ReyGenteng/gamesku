@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamesNow - Top Up Game Instan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            height: 30px;
+        }
+
+        .search-icon {
+            width: 24px;
+            cursor: pointer;
+        }
+
+        .banner {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .popular-games {
+            padding: 15px;
+        }
+
+        .popular-games h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+            border-bottom: 3px solid #ff4500;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .game-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .game-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .game-item p {
+            margin: 0;
+            padding: 10px 0;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: #888;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .footer-nav a.active {
+            color: #ff4500;
+        }
+
+        .footer-nav img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://reygenteng.github.io/gamesku/gamesnow.png" alt="GamesNow Logo" class="logo">
+        <img src="https://api.iconify.design/ic:baseline-search.svg" alt="Search" class="search-icon">
+    </header>
+
+    <main>
+        <img src="https://i.ibb.co/L56sYQy/banner.png" alt="Promosi Gacha Wangy" class="banner">
+
+        <div class="popular-games">
+            <h2>🔥 Lagi Populer</h2>
+            <div class="games-grid">
+                <a href="freefire.html" class="game-item">
+                    <img src="https://i.ibb.co/V99225W/Free-Fire.jpg" alt="Free Fire">
+                    <p>Free Fire</p>
+                </a>
+                <a href="mobilelegends.html" class="game-item">
+                    <img src="https://i.ibb.co/pLg3kXf/Mobile-Legends.jpg" alt="Mobile Legends">
+                    <p>Mobile Legends</p>
+                </a>
+                <a href="genshinimpact.html" class="game-item">
+                    <img src="https://i.ibb.co/j3vj21z/Genshin-Impact.jpg" alt="Genshin Impact">
+                    <p>Genshin Impact</p>
+                </a>
+                <a href="honorofkings.html" class="game-item">
+                    <img src="https://i.ibb.co/hV4sJp1/Honor-of-Kings.jpg" alt="Honor of Kings">
+                    <p>Honor of Kings</p>
+                </a>
+                <a href="steam.html" class="game-item">
+                    <img src="https://i.ibb.co/89f6vYF/Steam.jpg" alt="Steam">
+                    <p>Steam</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-nav">
+        <a href="#" class="active">
+            <img src="https://api.iconify.design/ic:baseline-home.svg" alt="Home">
+        </a>
+        <a href="#">
+            <img src="https://api.iconify.design/ic:baseline-bookmark.svg" alt="Simpan">
+        </a>
+        <a href="#">
+            <img src="https://api.iconify.design/ic:baseline-history.svg" alt="Riwayat">
+        </a>
+        <a href="#">
+            <img src="https://api.iconify.design/ic:baseline-person.svg" alt="Akun">
+        </a>
+    </footer>
+
+</body>
+</html>
