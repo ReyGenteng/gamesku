@@ -351,44 +351,58 @@
             width: 80%;
             max-width: 400px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            text-align: center;
+            position: relative;
         }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        .close-btn {
+        
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
             color: #aaa;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        .modal-body p {
-            font-size: 1em;
-            color: #555;
-            margin: 8px 0;
+        .modal-body .detail-section {
+            margin-bottom: 15px;
         }
 
-        .modal-body .info-label {
-            font-weight: bold;
-            color: #ff4500;
+        .modal-body .detail-section h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #333;
         }
 
+        .modal-body .detail-section p {
+            margin: 5px 0;
+            color: #777;
+        }
+        
+        .modal-body .alert-info {
+            background-color: #e6f7ff;
+            border: 1px solid #91d5ff;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-body .alert-info img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .modal-body .alert-info p {
+            margin: 0;
+            color: #1890ff;
+        }
+        
         .modal-footer {
             margin-top: 20px;
+            text-align: center;
         }
 
         .btn-confirm-wa {
@@ -403,7 +417,6 @@
     </style>
 </head>
 <body>
-
     <header>
         <img src="https://reygenteng.github.io/gamesku/gamesnow.png" alt="GamesNow Logo" class="logo">
         <div class="header-icons">
@@ -583,15 +596,27 @@
 
     <div id="confirmationModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>Konfirmasi Pembelian</h2>
-                <span class="close-btn">&times;</span>
-            </div>
+            <span class="close-btn" id="close-modal-ff">&times;</span>
             <div class="modal-body">
-                <p><span class="info-label">Harga:</span> Rp<span id="popupPrice"></span></p>
-                <p><span class="info-label">Nominal:</span> <span id="popupDiamonds"></span> Diamonds</p>
-                <p><span class="info-label">User ID:</span> <span id="popupUserId"></span></p>
-                <p><span class="info-label">Nama Akun:</span> <span id="popupUsername"></span></p>
+                <div class="alert-info">
+                    <img src="https://i.imgur.com/gK9JgP5.png" alt="Info Icon" class="alert-icon">
+                    <p>Pastikan detail pembelian benar.</p>
+                </div>
+                <div class="detail-section">
+                    <h4>Detail Produk</h4>
+                    <p>Nominal: <span id="popupDiamonds"></span> Diamonds</p>
+                    <p>Jumlah: 1</p>
+                </div>
+                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+                <div class="detail-section">
+                    <h4>Detail Bayar</h4>
+                    <p>Total transaksi: <span id="popupPrice"></span></p>
+                    <p>Bayar dengan: <span id="popupPaymentMethod"></span></p>
+                </div>
+                <div class="detail-section">
+                    <h4>Detail Akun</h4>
+                    <p>User ID: <span id="popupUserId"></span></p>
+                </div>
             </div>
             <div class="modal-footer">
                 <a href="#" id="confirmWaButton" class="btn-confirm-wa">Lanjutkan ke WhatsApp</a>
@@ -611,7 +636,7 @@
         const beliButton = document.querySelector('.btn-beli');
         const userIdInput = document.getElementById('userIdInput');
         const confirmationModal = document.getElementById('confirmationModal');
-        const closeBtn = document.querySelector('.close-btn');
+        const closeBtn = document.getElementById('close-modal-ff');
         const confirmWaButton = document.getElementById('confirmWaButton');
         
         let selectedNominal = null;
@@ -687,8 +712,8 @@
         
         document.querySelector('.sticky-footer').style.display = 'none';
 
-        // --- FUNGSI BARU UNTUK CEK USERNAME & POP-UP ---
-        beliButton.addEventListener('click', async (e) => {
+        // --- Perbarui Fungsi Beli Sekarang ---
+        beliButton.addEventListener('click', (e) => {
             e.preventDefault();
             
             const userId = userIdInput.value;
@@ -697,33 +722,13 @@
                 return;
             }
 
-            const merchantId = 'GANTI_DENGAN_MERCHANT_ID_ANDA';
-            const secretKey = 'GANTI_DENGAN_SECRET_KEY_ANDA';
-            const gameCode = 'freefire'; // Kode game untuk Free Fire
-            const signature = md5(merchantId + secretKey);
+            // Isi data ke dalam pop-up
+            document.getElementById('popupPrice').textContent = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
+            document.getElementById('popupDiamonds').textContent = selectedNominal.dataset.diamonds;
+            document.getElementById('popupUserId').textContent = userId;
+            document.getElementById('popupPaymentMethod').textContent = selectedPayment.dataset.name;
 
-            const apiUrl = `https://v1.apigames.id/merchant/${merchantId}/cek-username/${gameCode}?user_id=${userId}&signature=${signature}`;
-            
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    const username = data.data.username;
-                    
-                    document.getElementById('popupPrice').textContent = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
-                    document.getElementById('popupDiamonds').textContent = selectedNominal.dataset.diamonds;
-                    document.getElementById('popupUserId').textContent = userId;
-                    document.getElementById('popupUsername').textContent = username;
-
-                    confirmationModal.style.display = 'block';
-                } else {
-                    alert('User ID tidak ditemukan atau terjadi kesalahan pada API. Silakan coba lagi.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat memeriksa User ID. Coba cek koneksi internetmu atau ID yang dimasukkan.');
-            }
+            confirmationModal.style.display = 'block';
         });
 
         // Menutup pop-up
@@ -739,22 +744,15 @@
 
         // Mengarahkan ke WhatsApp saat tombol di pop-up diklik
         confirmWaButton.addEventListener('click', () => {
-            const username = document.getElementById('popupUsername').textContent;
             const diamonds = document.getElementById('popupDiamonds').textContent;
             const price = document.getElementById('popupPrice').textContent;
+            const userId = document.getElementById('popupUserId').textContent;
 
-            const waText = `Halo Kak, Username ${username} Mau Topup Senilai ${diamonds} Seharga Rp${price}`;
+            const waText = `Halo Kak, mau top up ${diamonds} seharga Rp${price} untuk User ID: ${userId}.`;
             const waUrl = `https://wa.me/6289525036410?text=${encodeURIComponent(waText)}`;
 
             window.location.href = waUrl;
         });
-
-        // Fungsi MD5 (untuk API Signature)
-        function md5(string) {
-            // Ini adalah fungsi MD5 sederhana. Kamu bisa cari di Google 'md5.js' dan pakai yang lebih lengkap
-            // untuk keamanan yang lebih baik. Untuk sekarang, ini sudah cukup.
-            return 'd41d8cd98f00b204e9800998ecf8427e'; // Contoh MD5
-        }
     </script>
 </body>
 </html>
