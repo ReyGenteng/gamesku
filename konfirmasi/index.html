@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konfirmasi Pembelian - GamesNow</title>
+    <title>Input Pesanan Admin - GamesNow</title>
     <link rel="icon" href="https://reygenteng.github.io/gamesku/gamesnow.png" type="image/png">
     <style>
         body {
@@ -60,46 +60,8 @@
             text-align: center;
         }
 
-        .alert-info {
-            background-color: #e6f7ff;
-            border: 1px solid #91d5ff;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .alert-info img {
-            width: 24px;
-            height: 24px;
-            margin-right: 15px;
-        }
-
-        .alert-info p {
-            margin: 0;
-            color: #1890ff;
-        }
-
         h2 {
             color: #ff4500;
-        }
-
-        .detail-section {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        
-        .detail-section h4 {
-            color: #333;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-
-        .detail-section p {
-            margin: 5px 0;
-            color: #555;
         }
 
         .form-group {
@@ -157,21 +119,22 @@
     </header>
 
     <div class="container">
-        <div class="alert-info">
-            <img src="https://i.imgur.com/gK9JgP5.png" alt="Info Icon">
-            <p>Silakan lengkapi data untuk menyelesaikan pesanan.</p>
-        </div>
-        <h2>Konfirmasi Pembelian</h2>
-        <div class="detail-section">
-            <h4>Detail Pembelian</h4>
-            <p><strong>Nominal:</strong> <span id="confirmDiamonds"></span> Diamonds</p>
-            <p><strong>Harga:</strong> Rp<span id="confirmPrice"></span></p>
-            <p><strong>Metode Bayar:</strong> <span id="confirmPayment"></span></p>
-            <p><strong>User ID:</strong> <span id="confirmUserId"></span></p>
+        <h2>Input Pesanan Admin</h2>
+        <div class="form-group">
+            <label for="userIdInput">User ID:</label>
+            <input type="text" id="userIdInput" placeholder="Masukkan User ID" required>
         </div>
         <div class="form-group">
-            <label for="usernameInput">Username Akun Free Fire:</label>
-            <input type="text" id="usernameInput" placeholder="Contoh: amak-gamer" required>
+            <label for="usernameInput">Username Akun:</label>
+            <input type="text" id="usernameInput" placeholder="Masukkan Username" required>
+        </div>
+        <div class="form-group">
+            <label for="diamondsInput">Jumlah Diamond:</label>
+            <input type="number" id="diamondsInput" placeholder="Contoh: 100" required>
+        </div>
+        <div class="form-group">
+            <label for="priceInput">Total Harga (Rp):</label>
+            <input type="number" id="priceInput" placeholder="Contoh: 15000" required>
         </div>
         <button id="saveOrder" class="btn-confirm">Simpan Pesanan</button>
     </div>
@@ -200,43 +163,33 @@
         
         const saveOrderButton = document.getElementById('saveOrder');
         
-        const urlParams = new URLSearchParams(window.location.search);
-        const price = urlParams.get('price');
-        const diamonds = urlParams.get('diamonds');
-        const userId = urlParams.get('userId');
-        const paymentMethod = urlParams.get('payment');
-        
-        document.getElementById('confirmDiamonds').textContent = diamonds;
-        document.getElementById('confirmPrice').textContent = parseInt(price).toLocaleString('id-ID');
-        document.getElementById('confirmPayment').textContent = paymentMethod;
-        document.getElementById('confirmUserId').textContent = userId;
-
         saveOrderButton.addEventListener('click', () => {
+            const userId = document.getElementById('userIdInput').value.trim();
             const username = document.getElementById('usernameInput').value.trim();
-            if (username === '') {
-                alert('Mohon isi Username Akun Free Fire.');
+            const diamonds = document.getElementById('diamondsInput').value.trim();
+            const price = document.getElementById('priceInput').value.trim();
+            
+            if (!userId || !username || !diamonds || !price) {
+                alert('Mohon lengkapi semua data.');
                 return;
             }
             
-            // Buat objek data untuk disimpan
-            const invoiceData = {
+            const orderData = {
                 userId: userId,
                 username: username,
-                diamonds: diamonds,
+                diamonds: parseInt(diamonds),
                 price: parseInt(price),
-                paymentMethod: paymentMethod,
                 timestamp: Date.now()
             };
             
-            // Simpan data ke Firebase di path 'ffinvoice'
-            const newInvoiceRef = push(ref(db, 'ffinvoice'));
-            set(newInvoiceRef, invoiceData)
+            const newOrderRef = push(ref(db, 'ffinvoice'));
+            set(newOrderRef, orderData)
                 .then(() => {
                     alert("Pesanan berhasil disimpan! ✅");
-                    // Kosongkan form setelah berhasil
+                    document.getElementById('userIdInput').value = '';
                     document.getElementById('usernameInput').value = '';
-                    // Opsional: bisa redirect ke halaman lain atau kembali ke halaman utama
-                    // window.location.href = "index.html";
+                    document.getElementById('diamondsInput').value = '';
+                    document.getElementById('priceInput').value = '';
                 })
                 .catch((error) => {
                     alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi. 😟");
