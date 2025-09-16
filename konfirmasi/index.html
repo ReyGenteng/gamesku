@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pembelian - GamesNow</title>
+    <link rel="icon" href="https://reygenteng.github.io/gamesku/gamesnow.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            height: 30px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icons img {
+            width: 24px;
+            cursor: pointer;
+        }
+        
+        .header-icons .btn-masuk {
+            padding: 8px 15px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .alert-info {
+            background-color: #e6f7ff;
+            border: 1px solid #91d5ff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .alert-info img {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+        }
+
+        .alert-info p {
+            margin: 0;
+            color: #1890ff;
+        }
+
+        h2 {
+            color: #ff4500;
+        }
+
+        .detail-section {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .detail-section h4 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .detail-section p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        
+        .btn-confirm {
+            background-color: #ff4500;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #888;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://reygenteng.github.io/gamesku/gamesnow.png" alt="GamesNow Logo" class="logo">
+        <div class="header-icons">
+            <img src="https://api.iconify.design/ic:baseline-search.svg" alt="Search">
+            <img src="https://api.iconify.design/ic:baseline-account-circle.svg" alt="Akun">
+            <button class="btn-masuk">Masuk</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="alert-info">
+            <img src="https://i.imgur.com/gK9JgP5.png" alt="Info Icon">
+            <p>Silakan lengkapi data untuk menyelesaikan pesanan.</p>
+        </div>
+        <h2>Konfirmasi Pembelian</h2>
+        <div class="detail-section">
+            <h4>Detail Pembelian</h4>
+            <p><strong>Nominal:</strong> <span id="confirmDiamonds"></span> Diamonds</p>
+            <p><strong>Harga:</strong> Rp<span id="confirmPrice"></span></p>
+            <p><strong>Metode Bayar:</strong> <span id="confirmPayment"></span></p>
+            <p><strong>User ID:</strong> <span id="confirmUserId"></span></p>
+        </div>
+        <div class="form-group">
+            <label for="usernameInput">Username Akun Free Fire:</label>
+            <input type="text" id="usernameInput" placeholder="Contoh: amak-gamer" required>
+        </div>
+        <button id="saveOrder" class="btn-confirm">Simpan Pesanan</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 GamesNow. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMrg2agHatw9REIXs0Pj-894UMhMB08NI",
+            authDomain: "databaseku-4e72e.firebaseapp.com",
+            databaseURL: "https://databaseku-4e72e-default-rtdb.firebaseio.com",
+            projectId: "databaseku-4e72e",
+            storageBucket: "databaseku-4e72e.firebasestorage.app",
+            messagingSenderId: "586627388924",
+            appId: "1:586627388924:web:8b39ecd9f5e5d34ee78e79",
+            measurementId: "G-JSP6R4FN49"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        
+        const saveOrderButton = document.getElementById('saveOrder');
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const price = urlParams.get('price');
+        const diamonds = urlParams.get('diamonds');
+        const userId = urlParams.get('userId');
+        const paymentMethod = urlParams.get('payment');
+        
+        document.getElementById('confirmDiamonds').textContent = diamonds;
+        document.getElementById('confirmPrice').textContent = parseInt(price).toLocaleString('id-ID');
+        document.getElementById('confirmPayment').textContent = paymentMethod;
+        document.getElementById('confirmUserId').textContent = userId;
+
+        saveOrderButton.addEventListener('click', () => {
+            const username = document.getElementById('usernameInput').value.trim();
+            if (username === '') {
+                alert('Mohon isi Username Akun Free Fire.');
+                return;
+            }
+            
+            // Buat objek data untuk disimpan
+            const invoiceData = {
+                userId: userId,
+                username: username,
+                diamonds: diamonds,
+                price: parseInt(price),
+                paymentMethod: paymentMethod,
+                timestamp: Date.now()
+            };
+            
+            // Simpan data ke Firebase di path 'ffinvoice'
+            const newInvoiceRef = push(ref(db, 'ffinvoice'));
+            set(newInvoiceRef, invoiceData)
+                .then(() => {
+                    alert("Pesanan berhasil disimpan! ✅");
+                    // Kosongkan form setelah berhasil
+                    document.getElementById('usernameInput').value = '';
+                    // Opsional: bisa redirect ke halaman lain atau kembali ke halaman utama
+                    // window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi. 😟");
+                    console.error("Error writing to database: ", error);
+                });
+        });
+    </script>
+</body>
+</html>
