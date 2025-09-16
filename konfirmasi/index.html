@@ -173,7 +173,7 @@
         </div>
         <div class="btn-action-group">
             <button id="searchOrderButton" class="btn-confirm btn-edit">Cari & Isi Data</button>
-            <button id="deleteOrderButton" class="btn-confirm btn-delete">Hapus Pesanan</button>
+            <button id="deleteOrderButton" class="btn-confirm btn-delete" disabled>Hapus Pesanan</button>
         </div>
         
         <div class="section-separator"></div>
@@ -217,7 +217,8 @@
         };
         
         const app = initializeApp(firebaseConfig);
-        const dbRef = ref(getDatabase(app));
+        const db = getDatabase(app);
+        const dbRef = ref(db);
         
         // Form input pesanan baru
         const newUserIdInput = document.getElementById('newUserIdInput');
@@ -236,6 +237,19 @@
         const editDiamondsInput = document.getElementById('editDiamondsInput');
         const editPriceInput = document.getElementById('editPriceInput');
         
+        function resetEditForm() {
+            editUserIdInput.value = '';
+            editUsernameInput.value = '';
+            editDiamondsInput.value = '';
+            editPriceInput.value = '';
+            editUserIdInput.disabled = true;
+            editUsernameInput.disabled = true;
+            editDiamondsInput.disabled = true;
+            editPriceInput.disabled = true;
+            updateOrderButton.disabled = true;
+            deleteOrderButton.disabled = true;
+        }
+
         // --- Fungsi Simpan Pesanan Baru ---
         saveOrderButton.addEventListener('click', () => {
             const userId = newUserIdInput.value.trim();
@@ -256,7 +270,7 @@
                 timestamp: Date.now()
             };
             
-            const newOrderRef = push(ref(getDatabase(app), 'ffinvoice'));
+            const newOrderRef = push(ref(db, 'ffinvoice'));
             set(newOrderRef, orderData)
                 .then(() => {
                     alert("Pesanan berhasil disimpan! ✅");
@@ -278,7 +292,12 @@
                 alert('Mohon masukkan Invoice ID.');
                 return;
             }
-
+            
+            // Nonaktifkan tombol dan form saat mencari
+            searchOrderButton.disabled = true;
+            deleteOrderButton.disabled = true;
+            updateOrderButton.disabled = true;
+            
             get(child(dbRef, `ffinvoice/${orderId}`))
                 .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -288,30 +307,27 @@
                         editDiamondsInput.value = data.diamonds;
                         editPriceInput.value = data.price;
 
-                        // Aktifkan form edit dan tombol update
+                        // Aktifkan form edit dan tombol update/hapus
                         editUserIdInput.disabled = false;
                         editUsernameInput.disabled = false;
                         editDiamondsInput.disabled = false;
                         editPriceInput.disabled = false;
                         updateOrderButton.disabled = false;
-                        alert("Data ditemukan! Anda sekarang bisa mengedit dan meng-update pesanan.");
+                        deleteOrderButton.disabled = false; // Aktifkan tombol hapus
+                        
+                        alert("Data ditemukan! Anda sekarang bisa mengedit atau menghapus pesanan.");
                     } else {
                         alert("Invoice ID tidak ditemukan. 😟");
-                        // Reset form edit
-                        editUserIdInput.value = '';
-                        editUsernameInput.value = '';
-                        editDiamondsInput.value = '';
-                        editPriceInput.value = '';
-                        editUserIdInput.disabled = true;
-                        editUsernameInput.disabled = true;
-                        editDiamondsInput.disabled = true;
-                        editPriceInput.disabled = true;
-                        updateOrderButton.disabled = true;
+                        resetEditForm();
                     }
                 })
                 .catch((error) => {
-                    alert("Terjadi kesalahan saat mencari data.");
+                    alert("Terjadi kesalahan saat mencari data. Silakan coba lagi.");
                     console.error("Error fetching data: ", error);
+                    resetEditForm();
+                })
+                .finally(() => {
+                    searchOrderButton.disabled = false;
                 });
         });
 
@@ -333,20 +349,11 @@
             const updates = {};
             updates['/ffinvoice/' + orderId] = updatedData;
 
-            update(ref(getDatabase(app)), updates)
+            update(ref(db), updates)
                 .then(() => {
                     alert("Pesanan berhasil di-update! ✅");
-                    // Reset form kelola
                     orderIdInput.value = '';
-                    editUserIdInput.value = '';
-                    editUsernameInput.value = '';
-                    editDiamondsInput.value = '';
-                    editPriceInput.value = '';
-                    editUserIdInput.disabled = true;
-                    editUsernameInput.disabled = true;
-                    editDiamondsInput.disabled = true;
-                    editPriceInput.disabled = true;
-                    updateOrderButton.disabled = true;
+                    resetEditForm();
                 })
                 .catch((error) => {
                     alert("Terjadi kesalahan saat meng-update data. Silakan coba lagi. 😟");
@@ -363,10 +370,11 @@
             }
 
             if (confirm("Apakah Anda yakin ingin menghapus pesanan ini?")) {
-                remove(ref(getDatabase(app), 'ffinvoice/' + orderId))
+                remove(ref(db, 'ffinvoice/' + orderId))
                     .then(() => {
                         alert("Pesanan berhasil dihapus! 🗑️");
                         orderIdInput.value = '';
+                        resetEditForm();
                     })
                     .catch((error) => {
                         alert("Terjadi kesalahan saat menghapus data. Silakan coba lagi. 😟");
@@ -374,6 +382,10 @@
                     });
             }
         });
+        
+        // Inisialisasi awal: tombol hapus dan update dinonaktifkan
+        resetEditForm();
+        deleteOrderButton.disabled = true;
     </script>
 </body>
 </html>
