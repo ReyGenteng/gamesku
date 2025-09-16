@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Invoice - GamesNow</title>
+    <title>Invoice - GamesNow</title>
     <link rel="icon" href="https://reygenteng.github.io/gamesku/gamesnow.png" type="image/png">
     <style>
         body {
@@ -141,14 +141,14 @@
     </header>
 
     <div class="container">
-        <h2>Cari Invoice</h2>
+        <h2>Cari Invoice Pesanan</h2>
         <div class="search-section">
             <input type="text" id="searchInput" placeholder="Masukkan User ID atau Username">
             <button id="searchButton">Cari</button>
         </div>
         <div id="invoice-results">
             <div class="empty-state">
-                <p>Belum ada invoice yang ditampilkan. Silakan cari pesanan Anda.</p>
+                <p>Silakan masukkan User ID atau Username untuk mencari pesanan Anda.</p>
             </div>
         </div>
     </div>
@@ -194,7 +194,6 @@
             
             const invoicesRef = ref(db, 'ffinvoice');
             
-            // Mencari berdasarkan User ID
             const userIdQuery = query(invoicesRef, orderByChild('userId'), equalTo(term));
             
             onValue(userIdQuery, (snapshot) => {
@@ -207,7 +206,6 @@
                     });
                 }
                 
-                // Jika tidak ditemukan, coba cari berdasarkan Username
                 if (!found) {
                     const usernameQuery = query(invoicesRef, orderByChild('username'), equalTo(term));
                     onValue(usernameQuery, (usernameSnapshot) => {
@@ -220,7 +218,7 @@
                         }
                         
                         if (!found) {
-                            invoiceResults.innerHTML = '<div class="empty-state"><p>Tidak ditemukan invoice dengan User ID atau Username tersebut.</p></div>';
+                            invoiceResults.innerHTML = '<div class="empty-state"><p>Tidak ditemukan pesanan dengan User ID atau Username tersebut.</p></div>';
                         }
                     }, { onlyOnce: true });
                 }
@@ -236,7 +234,6 @@
                 <p><strong>Username:</strong> ${data.username || 'N/A'}</p>
                 <p><strong>Jumlah Diamond:</strong> ${data.diamonds}</p>
                 <p><strong>Total Harga:</strong> Rp${data.price.toLocaleString('id-ID')}</p>
-                <p><strong>Metode Pembayaran:</strong> ${data.paymentMethod}</p>
                 <p><strong>Tanggal Transaksi:</strong> ${new Date(data.timestamp).toLocaleString('id-ID')}</p>
             `;
             invoiceResults.appendChild(invoiceCard);
