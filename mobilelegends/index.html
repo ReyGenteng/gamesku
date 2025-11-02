@@ -216,23 +216,6 @@
             font-weight: bold;
             color: #ff4500;
         }
-
-        .price-note {
-            font-size: 0.7em;
-            color: #888;
-            text-decoration: line-through;
-            margin-left: 5px;
-        }
-        
-        .discount-tag {
-            background-color: #ff4500;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.6em;
-            font-weight: bold;
-            margin-left: 5px;
-        }
         
         .form-section {
             background-color: #fff;
@@ -254,6 +237,15 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1em;
+        }
+        
+        /* Style untuk input ID & Zone ID */
+        .id-zone-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        .id-zone-inputs input {
+            width: 100%; /* Lebar akan dibagi */
         }
 
         .payment-grid {
@@ -299,7 +291,7 @@
             background-color: #ffffff;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
             padding: 10px 15px;
-            display: flex;
+            display: none; /* Sembunyikan dulu */
             justify-content: space-between;
             align-items: center;
             box-sizing: border-box;
@@ -329,7 +321,12 @@
             text-decoration: none;
         }
         
-        /* Modal (Pop-up) */
+        .btn-beli:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* --- STYLING MODAL (Pop-up) --- */
         .modal {
             display: none;
             position: fixed;
@@ -379,6 +376,7 @@
             color: #777;
         }
         
+        /* --- STYLING KHUSUS MODAL WHATSAPP --- */
         .modal-body .alert-info {
             background-color: #e6f7ff;
             border: 1px solid #91d5ff;
@@ -413,6 +411,87 @@
             text-decoration: none;
             font-weight: bold;
             display: inline-block;
+        }
+        
+        /* --- STYLING KHUSUS MODAL QRIS --- */
+        #qrisModal .modal-body {
+            text-align: center;
+        }
+        
+        #qrisImage {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        #qrisNominal {
+            font-weight: bold;
+            color: #ff4500;
+        }
+        
+        #qrisTimer {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #d9534f;
+            margin-top: 10px;
+        }
+        
+        #qrisStatus {
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .btn-cancel-qris {
+            background-color: #888;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* --- STYLING KHUSUS MODAL STRUK --- */
+        #receiptModal .modal-body {
+            text-align: center;
+        }
+        #receiptModal h2 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+        .receipt-details {
+            text-align: left;
+            border-top: 1px dashed #ccc;
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+            margin-top: 15px;
+        }
+        .receipt-details p {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+        .receipt-details p span:first-child {
+            color: #555;
+        }
+        .receipt-details p span:last-child {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-close-receipt {
+            background-color: #ff4500;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -458,109 +537,150 @@
                 </div>
 
                 <div class="nominal-grid">
-                    <div class="nominal-item" data-price="3523" data-diamonds="12" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 12 Diamonds</h4>
-                        <p>Rp3.523</p>
+                    <div class="nominal-item" data-price="4004" data-code="ML3" data-diamonds="3 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 3 Diamond</h4>
+                        <p>Rp4.004</p>
                     </div>
-                    <div class="nominal-item" data-price="8732" data-diamonds="28" data-category="all terpopuler">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 28 Diamonds</h4>
-                        <p>Rp8.732</p>
+                    <div class="nominal-item" data-price="4444" data-code="ML5" data-diamonds="5 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 5 Diamond</h4>
+                        <p>Rp4.444</p>
                     </div>
-                    <div class="nominal-item" data-price="10613" data-diamonds="36" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 36 Diamonds</h4>
-                        <p>Rp10.613</p>
+                    <div class="nominal-item" data-price="5889" data-code="ML10" data-diamonds="10 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 10 Diamond</h4>
+                        <p>Rp5.889</p>
                     </div>
-                    <div class="nominal-item" data-price="16142" data-diamonds="56" data-category="all terpopuler">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 56 Diamonds</h4>
-                        <p>Rp16.142</p>
+                    <div class="nominal-item" data-price="6370" data-code="ML12" data-diamonds="12 Diamond" data-category="all terpopuler">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 12 Diamond</h4>
+                        <p>Rp6.370</p>
                     </div>
-                    <div class="nominal-item" data-price="23765" data-diamonds="85" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 85 Diamonds</h4>
-                        <p>Rp23.765</p>
+                    <div class="nominal-item" data-price="6382" data-code="ML11" data-diamonds="11 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 11 Diamond</h4>
+                        <p>Rp6.382</p>
                     </div>
-                    <div class="nominal-item" data-price="46921" data-diamonds="169" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 169 Diamonds</h4>
-                        <p>Rp46.921</p>
+                    <div class="nominal-item" data-price="6922" data-code="ML14" data-diamonds="14 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 14 Diamond</h4>
+                        <p>Rp6.922</p>
                     </div>
-                    <div class="nominal-item" data-price="60926" data-diamonds="220" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 220 Diamonds</h4>
-                        <p>Rp60.926</p>
+                    <div class="nominal-item" data-price="7341" data-code="ML15" data-diamonds="15 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 15 Diamond</h4>
+                        <p>Rp7.341</p>
                     </div>
-                    <div class="nominal-item" data-price="80516" data-diamonds="282" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 282 Diamonds</h4>
-                        <p>Rp80.516</p>
+                    <div class="nominal-item" data-price="7848" data-code="ML17" data-diamonds="17 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 17 Diamond</h4>
+                        <p>Rp7.848</p>
                     </div>
-                    <div class="nominal-item" data-price="100562" data-diamonds="366" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 366 Diamonds</h4>
-                        <p>Rp100.562</p>
+                    <div class="nominal-item" data-price="7903" data-code="ML18" data-diamonds="18 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 18 Diamond</h4>
+                        <p>Rp7.903</p>
                     </div>
-                    <div class="nominal-item" data-price="150832" data-diamonds="568" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 568 Diamonds</h4>
-                        <p>Rp150.832</p>
+                    <div class="nominal-item" data-price="8295" data-code="ML19" data-diamonds="19 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 19 Diamond</h4>
+                        <p>Rp8.295</p>
                     </div>
-                    <div class="nominal-item" data-price="230164" data-diamonds="875" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 875 Diamonds</h4>
-                        <p>Rp230.164</p>
+                    <div class="nominal-item" data-price="8782" data-code="ML20" data-diamonds="20 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 20 Diamond</h4>
+                        <p>Rp8.782</p>
                     </div>
-                    <div class="nominal-item" data-price="500321" data-diamonds="2010" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 2010 Diamonds</h4>
-                        <p>Rp500.321</p>
+                    <div class="nominal-item" data-price="9269" data-code="ML22" data-diamonds="22 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 22 Diamond</h4>
+                        <p>Rp9.269</p>
                     </div>
-                    <div class="nominal-item" data-price="1200624" data-diamonds="4804" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 4804 Diamonds</h4>
-                        <p>Rp1.200.624</p>
+                    <div class="nominal-item" data-price="10738" data-code="ML28" data-diamonds="28 Diamond" data-category="all terpopuler">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 28 Diamond</h4>
+                        <p>Rp10.738</p>
                     </div>
-                    <div class="nominal-item" data-price="1500543" data-diamonds="6004" data-category="all">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 6004 Diamonds</h4>
-                        <p>Rp1.500.543</p>
+                    <div class="nominal-item" data-price="11293" data-code="ML30" data-diamonds="30 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 30 Diamond</h4>
+                        <p>Rp11.293</p>
                     </div>
-                    <div class="nominal-item" data-price="50000" data-diamonds="Weekly Pass" data-category="membership">
-                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> Weekly Pass</h4>
-                        <p>Rp50.000</p>
+                    <div class="nominal-item" data-price="12104" data-code="ML33" data-diamonds="33 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 33 Diamond</h4>
+                        <p>Rp12.104</p>
+                    </div>
+                    <div class="nominal-item" data-price="12760" data-code="ML34" data-diamonds="34 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 34 Diamond</h4>
+                        <p>Rp12.760</p>
+                    </div>
+                    <div class="nominal-item" data-price="12806" data-code="ML36" data-diamonds="36 Diamond" data-category="all terpopuler">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 36 Diamond</h4>
+                        <p>Rp12.806</p>
+                    </div>
+                    <div class="nominal-item" data-price="14552" data-code="ML44" data-diamonds="44 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 44 Diamond</h4>
+                        <p>Rp14.552</p>
+                    </div>
+                    <div class="nominal-item" data-price="14593" data-code="ML42" data-diamonds="42 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 42 Diamond</h4>
+                        <p>Rp14.593</p>
+                    </div>
+                    <div class="nominal-item" data-price="15393" data-code="ML45" data-diamonds="45 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 45 Diamond</h4>
+                        <p>Rp15.393</p>
+                    </div>
+                    <div class="nominal-item" data-price="15796" data-code="ML46" data-diamonds="46 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 46 Diamond</h4>
+                        <p>Rp15.796</p>
+                    </div>
+                    <div class="nominal-item" data-price="16430" data-code="ML50" data-diamonds="50 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 50 Diamond</h4>
+                        <p>Rp16.430</p>
+                    </div>
+                    <div class="nominal-item" data-price="17708" data-code="ML54" data-diamonds="54 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 54 Diamond</h4>
+                        <p>Rp17.708</p>
+                    </div>
+                    <div class="nominal-item" data-price="18003" data-code="ML56" data-diamonds="56 Diamond" data-category="all terpopuler">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 56 Diamond</h4>
+                        <p>Rp18.003</p>
+                    </div>
+                    <div class="nominal-item" data-price="30220" data-code="MLW1" data-diamonds="Weekly Diamond Pass" data-category="membership">
+                        <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> Weekly Diamond Pass</h4>
+                        <p>Rp30.220</p>
                     </div>
                 </div>
             </div>
             
             <div class="step-section form-section">
                 <h3><span>2</span> Masukkan jumlah pembelian</h3>
-                <input type="number" value="1">
+                <input type="number" value="1" id="quantityInput" disabled>
+                <small style="color: #888;">*Fitur jumlah pembelian belum didukung, otomatis 1.</small>
             </div>
 
             <div class="step-section form-section">
                 <h3><span>3</span> Pilih metode bayar</h3>
                 <div class="payment-grid">
+                    <div class="payment-item" data-name="QRIS">
+                        <div class="info">
+                            <img src="https://raw.githubusercontent.com/ReyGenteng/reybelirbx/refs/heads/main/belirobux/qris.png" alt="QRIS Logo">
+                            <span>QRIS (Bayar Langsung)</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
                     <div class="payment-item" data-name="DANA">
                         <div class="info">
                             <img src="https://reygenteng.github.io/reybelirbx/belirobux/dana.png" alt="DANA Logo">
-                            <span>DANA</span>
+                            <span>DANA (via WhatsApp)</span>
                         </div>
                         <span class="price"></span>
                     </div>
                     <div class="payment-item" data-name="GoPay">
                         <div class="info">
                             <img src="https://reygenteng.github.io/reybelirbx/belirobux/gopay.png" alt="Gopay Logo">
-                            <span>GoPay</span>
+                            <span>GoPay (via WhatsApp)</span>
                         </div>
                         <span class="price"></span>
                     </div>
                     <div class="payment-item" data-name="OVO">
                         <div class="info">
                             <img src="https://reygenteng.github.io/reybelirbx/belirobux/ovo.png" alt="OVO Logo">
-                            <span>OVO</span>
-                        </div>
-                        <span class="price"></span>
-                    </div>
-                    <div class="payment-item" data-name="QRIS">
-                        <div class="info">
-                            <img src="https://raw.githubusercontent.com/ReyGenteng/reybelirbx/refs/heads/main/belirobux/qris.png" alt="QRIS Logo">
-                            <span>QRIS</span>
+                            <span>OVO (via WhatsApp)</span>
                         </div>
                         <span class="price"></span>
                     </div>
                     <div class="payment-item" data-name="ShopeePay">
                         <div class="info">
                             <img src="https://reygenteng.github.io/reybelirbx/belirobux/shopeepay.png" alt="ShopeePay Logo">
-                            <span>ShopeePay</span>
+                            <span>ShopeePay (via WhatsApp)</span>
                         </div>
                         <span class="price"></span>
                     </div>
@@ -569,9 +689,11 @@
 
             <div class="step-section form-section">
                 <h3><span>4</span> Masukkan detail akun</h3>
-                <input type="text" placeholder="Masukkan User ID" id="userIdInput">
+                <div class="id-zone-inputs">
+                    <input type="text" placeholder="Masukkan User ID" id="userIdInput">
+                    <input type="text" placeholder="Zone ID" id="zoneIdInput">
+                </div>
             </div>
-
             <div class="step-section form-section">
                 <h3><span>5</span> Masukkan info kontak</h3>
                 <input type="email" placeholder="Masukkan email (opsional)">
@@ -594,14 +716,14 @@
     <div class="sticky-footer">
         <div class="price-info">
             <h4>Rp<span id="finalPrice">0</span></h4>
-            <p><span id="finalDiamonds">0</span> Diamonds, <span id="finalPayment"></span></p>
+            <p><span id="finalDiamonds">Pilih Produk</span>, <span id="finalPayment">Pilih Pembayaran</span></p>
         </div>
         <a href="#" class="btn-beli">Beli Sekarang</a>
     </div>
 
-    <div id="confirmationModal" class="modal">
+    <div id="whatsappModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="close-modal-ml">&times;</span>
+            <span class="close-btn" id="closeWhatsappModal">&times;</span>
             <div class="modal-body">
                 <div class="alert-info">
                     <img src="https://i.imgur.com/gK9JgP5.png" alt="Info Icon" class="alert-icon">
@@ -609,13 +731,13 @@
                 </div>
                 <div class="detail-section">
                     <h4>Detail Produk</h4>
-                    <p>Nominal: <span id="popupDiamonds"></span> Diamonds</p>
+                    <p>Nominal: <span id="popupDiamonds"></span></p>
                     <p>Jumlah: 1</p>
                 </div>
                 <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
                 <div class="detail-section">
                     <h4>Detail Bayar</h4>
-                    <p>Total transaksi: <span id="popupPrice"></span></p>
+                    <p>Total transaksi: Rp<span id="popupPrice"></span></p>
                     <p>Bayar dengan: <span id="popupPaymentMethod"></span></p>
                 </div>
                 <div class="detail-section">
@@ -624,12 +746,59 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" id="confirmWaButton" class="btn-confirm-wa">Lanjutkan ke WhatsApp</a>
+                <a href="#" id="confirmWhatsappButton" class="btn-confirm-wa">Lanjutkan ke WhatsApp</a>
             </div>
         </div>
     </div>
 
+    <div id="qrisModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeQrisModal">&times;</span>
+            <div class="modal-body">
+                <h4>Selesaikan Pembayaran</h4>
+                <p>Scan QR code di bawah ini untuk membayar</p>
+                <img src="httpsa://via.placeholder.com/250" alt="QR Code" id="qrisImage">
+                <p>Nominal: <strong>Rp<span id="qrisNominal">0</span></strong></p>
+                <p id="qrisTimer">15:00</p>
+                <p id="qrisStatus">Menunggu pembayaran...</p>
+                <button id="cancelQrisButton" class="btn-cancel-qris">Batalkan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="receiptModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeReceiptModal">&times;</span>
+            <div class="modal-body">
+                <h2 id="receiptTitle">Transaksi Berhasil</h2>
+                <div class="receipt-details">
+                    <p><span>Produk:</span> <span id="receiptProduct"></span></p>
+                    <p><span>User ID:</span> <span id="receiptUserId"></span></p>
+                    <p><span>Harga:</span> <span>Rp<span id="receiptPrice"></span></span></p>
+                    <p><span>Metode Bayar:</span> <span id="receiptPayment"></span></p>
+                    <p><span>Status:</span> <span id="receiptStatus"></span></p>
+                    <p><span>No. Transaksi:</span> <span id="receiptTrxId"></span></p>
+                </div>
+                <button id="closeReceiptButton" class="btn-close-receipt">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
+        // --- KONFIGURASI API ---
+        const API_KEY = "ftS3uUCMOztd71uxhWp9MsVQchbBNQXLOcLJpkQW1W9aQg3gyXvUzJQkHW7bV54P6fKeWrzIWJf44nuuUh7xPTMQHY8lCtslMfez";
+        const API_BASE_URL = "https://zproxy.officialardytc27.workers.dev/?url=https://atlantich2h.com";
+        const NOMOR_WHATSAPP = "6289525036410"; // Ganti dengan nomormu
+
+        // --- Variabel Global untuk Status ---
+        let selectedNominal = null;
+        let selectedPayment = null;
+        let qrisTimerInterval = null;
+        let qrisPollingInterval = null;
+        let currentDepositId = null;
+
+        // --- Ambil Elemen DOM ---
         const nominalItems = document.querySelectorAll('.nominal-item');
         const paymentItems = document.querySelectorAll('.payment-item');
         const finalPriceElement = document.getElementById('finalPrice');
@@ -637,15 +806,27 @@
         const finalPaymentElement = document.getElementById('finalPayment');
         const tabItems = document.querySelectorAll('.tab-item');
         const filterButtons = document.querySelectorAll('.filter-buttons a');
-        
         const beliButton = document.querySelector('.btn-beli');
-        const userIdInput = document.getElementById('userIdInput');
-        const confirmationModal = document.getElementById('confirmationModal');
-        const closeBtn = document.getElementById('close-modal-ml');
-        const confirmWaButton = document.getElementById('confirmWaButton');
         
-        let selectedNominal = null;
-        let selectedPayment = null;
+        // PERUBAHAN DI SINI: Menambahkan Zone ID
+        const userIdInput = document.getElementById('userIdInput');
+        const zoneIdInput = document.getElementById('zoneIdInput');
+        
+        // Modal WhatsApp
+        const whatsappModal = document.getElementById('whatsappModal');
+        const closeWhatsappModal = document.getElementById('closeWhatsappModal');
+        const confirmWhatsappButton = document.getElementById('confirmWhatsappButton');
+
+        // Modal QRIS
+        const qrisModal = document.getElementById('qrisModal');
+        const closeQrisModal = document.getElementById('closeQrisModal');
+        const cancelQrisButton = document.getElementById('cancelQrisButton');
+
+        // Modal Struk
+        const receiptModal = document.getElementById('receiptModal');
+        const closeReceiptModal = document.getElementById('closeReceiptModal');
+        const closeReceiptButton = document.getElementById('closeReceiptButton');
+
 
         // --- Fungsi untuk Tab ---
         tabItems.forEach(tab => {
@@ -668,7 +849,7 @@
 
                 const filter = button.dataset.filter;
                 nominalItems.forEach(item => {
-                    const categories = item.dataset.category;
+                    const categories = item.dataset.category || "all";
                     if (filter === 'all' || categories.includes(filter)) {
                         item.style.display = 'block';
                     } else {
@@ -683,7 +864,6 @@
             item.addEventListener('click', () => {
                 nominalItems.forEach(i => i.classList.remove('selected'));
                 item.classList.add('selected');
-                
                 selectedNominal = item;
                 updateFooter();
             });
@@ -693,71 +873,337 @@
             item.addEventListener('click', () => {
                 paymentItems.forEach(i => i.classList.remove('selected'));
                 item.classList.add('selected');
-
                 selectedPayment = item;
                 updateFooter();
             });
         });
 
         function updateFooter() {
+            let price = 0;
+            let diamonds = "Pilih Produk";
+            let payment = "Pilih Pembayaran";
+
+            if (selectedNominal) {
+                price = parseInt(selectedNominal.dataset.price);
+                diamonds = selectedNominal.dataset.diamonds;
+            }
+            if (selectedPayment) {
+                payment = selectedPayment.dataset.name;
+            }
+
+            finalPriceElement.textContent = price.toLocaleString('id-ID');
+            finalDiamondsElement.textContent = diamonds;
+            finalPaymentElement.textContent = payment;
+
             if (selectedNominal && selectedPayment) {
-                const price = parseInt(selectedNominal.dataset.price);
-                const diamonds = selectedNominal.dataset.diamonds;
-                const payment = selectedPayment.dataset.name;
-            
-                finalPriceElement.textContent = price.toLocaleString('id-ID');
-                finalDiamondsElement.textContent = diamonds;
-                finalPaymentElement.textContent = payment;
-                
                 document.querySelector('.sticky-footer').style.display = 'flex';
             } else {
                 document.querySelector('.sticky-footer').style.display = 'none';
             }
         }
-        
-        document.querySelector('.sticky-footer').style.display = 'none';
 
-        // --- Perbarui Fungsi Beli Sekarang ---
+        // --- Fungsi Tombol Beli Utama ---
         beliButton.addEventListener('click', (e) => {
             e.preventDefault();
             
+            // PERUBAHAN DI SINI: Validasi Zone ID
             const userId = userIdInput.value;
-            if (!selectedNominal || !selectedPayment || !userId) {
-                alert('Mohon lengkapi semua data: nominal, metode bayar, dan User ID.');
+            const zoneId = zoneIdInput.value;
+            
+            if (!selectedNominal || !selectedPayment || !userId || !zoneId) {
+                alert('Mohon lengkapi semua data: nominal, metode bayar, User ID, dan Zone ID.');
                 return;
             }
-
-            // Isi data ke dalam pop-up
-            document.getElementById('popupPrice').textContent = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
-            document.getElementById('popupDiamonds').textContent = selectedNominal.dataset.diamonds;
-            document.getElementById('popupUserId').textContent = userId;
-            document.getElementById('popupPaymentMethod').textContent = selectedPayment.dataset.name;
-
-            confirmationModal.style.display = 'block';
-        });
-
-        // Menutup pop-up
-        closeBtn.addEventListener('click', () => {
-            confirmationModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target == confirmationModal) {
-                confirmationModal.style.display = 'none';
+            
+            const paymentName = selectedPayment.dataset.name;
+            
+            if (paymentName.includes('QRIS')) {
+                // LOGIKA BARU: Panggil API QRIS
+                handleQrisPayment();
+            } else {
+                // LOGIKA LAMA: Buka Modal WhatsApp
+                showWhatsappModal();
             }
         });
 
-        // Mengarahkan ke WhatsApp saat tombol di pop-up diklik
-        confirmWaButton.addEventListener('click', () => {
+        // --- LOGIKA 1: Pembayaran via WhatsApp ---
+        function showWhatsappModal() {
+            const price = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
+            const diamonds = selectedNominal.dataset.diamonds;
+            const paymentMethod = selectedPayment.dataset.name;
+            
+            // PERUBAHAN DI SINI: Gabungkan ID + Zone
+            const userId = userIdInput.value;
+            const zoneId = zoneIdInput.value;
+            const combinedId = `${userId} (${zoneId})`;
+
+            document.getElementById('popupPrice').textContent = price;
+            document.getElementById('popupDiamonds').textContent = diamonds;
+            document.getElementById('popupUserId').textContent = combinedId; // Tampilkan ID gabungan
+            document.getElementById('popupPaymentMethod').textContent = paymentMethod;
+
+            whatsappModal.style.display = 'block';
+        }
+
+        confirmWhatsappButton.addEventListener('click', () => {
             const diamonds = document.getElementById('popupDiamonds').textContent;
             const price = document.getElementById('popupPrice').textContent;
-            const userId = document.getElementById('popupUserId').textContent;
+            // PERUBAHAN DI SINI: Ambil ID gabungan dari pop-up
+            const userIdFull = document.getElementById('popupUserId').textContent;
+            const paymentMethod = document.getElementById('popupPaymentMethod').textContent;
 
-            const waText = `Halo Kak, mau top up ${diamonds} seharga Rp${price} untuk User ID: ${userId}.`;
-            const waUrl = `https://wa.me/6289525036410?text=${encodeURIComponent(waText)}`;
+            const waText = `Halo Kak, mau top up ${diamonds} seharga Rp${price} (User ID: ${userIdFull}). Bayar via ${paymentMethod}.`;
+            const waUrl = `https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(waText)}`;
 
             window.location.href = waUrl;
         });
+
+        closeWhatsappModal.addEventListener('click', () => {
+            whatsappModal.style.display = 'none';
+        });
+
+        // --- LOGIKA 2: Pembayaran via QRIS (API) ---
+
+        // Fungsi untuk memanggil API
+        async function callApi(endpoint, data) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            
+            const body = new URLSearchParams();
+            for (const key in data) {
+                body.append(key, data[key]);
+            }
+            body.append('api_key', API_KEY);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: body
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('API Call Error:', error);
+                return { status: false, message: 'Terjadi kesalahan jaringan: ' + error.message };
+            }
+        }
+
+        // Langkah 2.1: Buat Deposit QRIS
+        async function handleQrisPayment() {
+            beliButton.textContent = 'Memproses...';
+            beliButton.disabled = true;
+
+            const nominal = parseInt(selectedNominal.dataset.price);
+            const reff_id = `GN-ML-${Date.now()}`; // Reff ID unik (diubah ke ML)
+
+            const data = {
+                reff_id: reff_id,
+                nominal: nominal,
+                type: 'ewallet',
+                metode: 'qris'
+            };
+
+            const response = await callApi('/deposit/create', data);
+
+            if (response.status === true) {
+                const depositData = response.data;
+                currentDepositId = depositData.id;
+
+                // Tampilkan Modal QRIS
+                document.getElementById('qrisImage').src = depositData.qr_image;
+                document.getElementById('qrisNominal').textContent = depositData.nominal.toLocaleString('id-ID');
+                document.getElementById('qrisStatus').textContent = 'Silakan scan QR untuk membayar...';
+                qrisModal.style.display = 'block';
+
+                // PERUBAHAN DI SINI: Siapkan data target
+                const userId = userIdInput.value;
+                const zoneId = zoneIdInput.value;
+                const target = `${userId}(${zoneId})`; // Format target: 12345(1234)
+
+                // Siapkan data untuk langkah selanjutnya (top up)
+                const orderDetails = {
+                    depositId: depositData.id,
+                    productCode: selectedNominal.dataset.code,
+                    productName: selectedNominal.dataset.diamonds,
+                    userId: userId, // Kirim ID mentah
+                    zoneId: zoneId, // Kirim Zone mentah
+                    target: target, // Kirim Target gabungan untuk API
+                    price: depositData.nominal
+                };
+
+                // Mulai timer dan polling
+                const expiryTime = new Date(depositData.expired_at).getTime();
+                startQrisTimer(expiryTime, depositData.id);
+                startPollingDepositStatus(orderDetails);
+
+            } else {
+                alert('Gagal membuat QRIS: ' + (response.message || 'Error tidak diketahui'));
+                beliButton.textContent = 'Beli Sekarang';
+                beliButton.disabled = false;
+            }
+        }
+
+        // Langkah 2.2: Hitung Mundur Timer
+        function startQrisTimer(expiryTime, depositId) {
+            clearInterval(qrisTimerInterval); 
+
+            qrisTimerInterval = setInterval(() => {
+                const now = Date.now();
+                const remaining = expiryTime - now;
+
+                if (remaining <= 0) {
+                    clearInterval(qrisTimerInterval);
+                    document.getElementById('qrisTimer').textContent = "00:00";
+                    document.getElementById('qrisStatus').textContent = "Waktu pembayaran habis.";
+                    if (currentDepositId === depositId) {
+                        cancelQrisPayment();
+                    }
+                } else {
+                    const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+                    document.getElementById('qrisTimer').textContent = 
+                        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // Langkah 2.3: Cek Status Pembayaran (Polling)
+        function startPollingDepositStatus(orderDetails) {
+            clearInterval(qrisPollingInterval); 
+
+            qrisPollingInterval = setInterval(async () => {
+                if (qrisModal.style.display !== 'block' || currentDepositId !== orderDetails.depositId) {
+                    clearInterval(qrisPollingInterval);
+                    return;
+                }
+
+                const response = await callApi('/deposit/status', { id: orderDetails.depositId });
+
+                if (response.status === true) {
+                    const status = response.data.status;
+                    
+                    if (status === 'success') {
+                        clearInterval(qrisPollingInterval);
+                        clearInterval(qrisTimerInterval);
+                        document.getElementById('qrisStatus').textContent = 'Pembayaran Berhasil! Memproses top up...';
+                        await handleTopUp(orderDetails);
+                    
+                    } else if (status === 'cancel' || status === 'expired') {
+                        clearInterval(qrisPollingInterval);
+                        clearInterval(qrisTimerInterval);
+                        document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan atau kedaluwarsa.';
+                    
+                    } else {
+                        document.getElementById('qrisStatus').textContent = 'Menunggu pembayaran...';
+                    }
+                } else {
+                    console.error('Gagal cek status deposit:', response.message);
+                }
+
+            }, 3000); // Cek setiap 3 detik
+        }
+
+        // Langkah 2.4: Lakukan Top Up Setelah Bayar Berhasil
+        async function handleTopUp(orderDetails) {
+            const trxReffId = `GN-TOPUP-${Date.now()}`;
+            
+            // PERUBAHAN DI SINI: Menggunakan 'orderDetails.target'
+            const data = {
+                reff_id: trxReffId,
+                code: orderDetails.productCode,
+                target: orderDetails.target // Ini berisi 'USERID(ZONEID)'
+            };
+
+            const response = await callApi('/transaksi/create', data);
+
+            // Tutup modal QRIS
+            qrisModal.style.display = 'none';
+
+            // PERUBAHAN DI SINI: Tampilkan ID gabungan di struk
+            const combinedId = `${orderDetails.userId} (${orderDetails.zoneId})`;
+            
+            // Tampilkan Struk
+            document.getElementById('receiptProduct').textContent = orderDetails.productName;
+            document.getElementById('receiptUserId').textContent = combinedId;
+            document.getElementById('receiptPrice').textContent = orderDetails.price.toLocaleString('id-ID');
+            document.getElementById('receiptPayment').textContent = 'QRIS';
+
+            if (response.status === true) {
+                document.getElementById('receiptTitle').textContent = 'Transaksi Diproses';
+                document.getElementById('receiptStatus').textContent = response.data.status;
+                document.getElementById('receiptTrxId').textContent = response.data.id;
+            } else {
+                document.getElementById('receiptTitle').textContent = 'Transaksi Gagal';
+                document.getElementById('receiptStatus').textContent = 'GAGAL';
+                document.getElementById('receiptTrxId').textContent = response.message || 'Error';
+            }
+            
+            receiptModal.style.display = 'block';
+
+            // Reset tombol beli
+            beliButton.textContent = 'Beli Sekarang';
+            beliButton.disabled = false;
+            currentDepositId = null; // Selesaikan sesi deposit
+        }
+
+        // Langkah 2.5: Batalkan Pembayaran QRIS
+        async function cancelQrisPayment() {
+            if (!currentDepositId) return;
+
+            clearInterval(qrisTimerInterval);
+            clearInterval(qrisPollingInterval);
+
+            const depositIdToCancel = currentDepositId;
+            currentDepositId = null; 
+
+            const response = await callApi('/deposit/cancel', { id: depositIdToCancel });
+
+            if (response.status === true) {
+                document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan.';
+            } else {
+                document.getElementById('qrisStatus').textContent = 'Gagal membatalkan: ' + response.message;
+            }
+            
+            setTimeout(() => {
+                qrisModal.style.display = 'none';
+                beliButton.textContent = 'Beli Sekarang';
+                beliButton.disabled = false;
+            }, 2000);
+        }
+
+        cancelQrisButton.addEventListener('click', cancelQrisPayment);
+        closeQrisModal.addEventListener('click', cancelQrisPayment);
+
+        // --- Fungsi Tutup Modal Struk ---
+        function closeReceipt() {
+            receiptModal.style.display = 'none';
+            // Reset pilihan
+            nominalItems.forEach(i => i.classList.remove('selected'));
+            paymentItems.forEach(i => i.classList.remove('selected'));
+            selectedNominal = null;
+            selectedPayment = null;
+            userIdInput.value = '';
+            zoneIdInput.value = ''; // Reset Zone ID juga
+            updateFooter();
+        }
+        closeReceiptModal.addEventListener('click', closeReceipt);
+        closeReceiptButton.addEventListener('click', closeReceipt);
+
+
+        // --- Tutup modal jika klik di luar area ---
+        window.addEventListener('click', (event) => {
+            if (event.target == whatsappModal) {
+                whatsappModal.style.display = 'none';
+            }
+            if (event.target == qrisModal) {
+                cancelQrisPayment(); // Klik di luar = batalkan
+            }
+            if (event.target == receiptModal) {
+                closeReceipt();
+            }
+        });
+
     </script>
 </body>
 </html>
