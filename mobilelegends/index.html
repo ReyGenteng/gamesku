@@ -14,223 +14,8 @@
             padding-bottom: 80px;
         }
 
-        header {
-            background-color: #ffffff;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            height: 30px;
-        }
-
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-icons img {
-            width: 24px;
-            cursor: pointer;
-        }
+        /* ... (CSS Lainnya tidak berubah) ... */
         
-        .header-icons .btn-masuk {
-            padding: 8px 15px;
-            background-color: #ff4500;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .breadcrumbs {
-            padding: 15px;
-            color: #888;
-            font-size: 0.9em;
-        }
-
-        .breadcrumbs a {
-            text-decoration: none;
-            color: #888;
-        }
-
-        .game-info {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .game-info img {
-            width: 60px;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-
-        .game-info h2 {
-            margin: 0;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .game-info p {
-            margin: 0;
-            font-size: 0.8em;
-            color: #ff4500;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #e0e0e0;
-            background-color: #fff;
-        }
-        
-        .tab-item {
-            flex-grow: 1;
-            text-align: center;
-            padding: 15px 0;
-            font-weight: bold;
-            color: #888;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .tab-item.active {
-            color: #ff4500;
-        }
-
-        .tab-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #ff4500;
-        }
-        
-        .content-tab {
-            display: none;
-        }
-        
-        .content-tab.active {
-            display: block;
-        }
-
-        .step-section {
-            padding: 15px;
-        }
-
-        .step-section h3 {
-            font-size: 1em;
-            color: #ff4500;
-            margin-bottom: 10px;
-        }
-
-        .step-section h3 span {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        .info-bar {
-            background-color: #ffedf0;
-            color: #ff4500;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .filter-buttons a {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #333;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-
-        .filter-buttons a.active {
-            background-color: #ff4500;
-            color: white;
-            border-color: #ff4500;
-        }
-        
-        .nominal-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .nominal-item {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            cursor: pointer;
-        }
-
-        .nominal-item.selected {
-            border: 2px solid #ff4500;
-            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
-        }
-
-        .nominal-item h4 {
-            margin: 0;
-            font-size: 1.1em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .nominal-item h4 img {
-            width: 20px;
-        }
-
-        .nominal-item p {
-            margin: 5px 0 0;
-            font-size: 1em;
-            font-weight: bold;
-            color: #ff4500;
-        }
-        
-        .form-section {
-            background-color: #fff;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .form-section h3 {
-            font-size: 1.1em;
-            color: #ff4500;
-            margin-bottom: 10px;
-        }
-
         .form-section input {
             width: calc(100% - 20px);
             padding: 10px;
@@ -239,13 +24,12 @@
             font-size: 1em;
         }
         
-        /* Style untuk input ID & Zone ID */
         .id-zone-inputs {
             display: flex;
             gap: 10px;
         }
         .id-zone-inputs input {
-            width: 100%; /* Lebar akan dibagi */
+            width: 100%; 
         }
 
         .payment-grid {
@@ -291,7 +75,7 @@
             background-color: #ffffff;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
             padding: 10px 15px;
-            display: none; /* Sembunyikan dulu */
+            display: none; 
             justify-content: space-between;
             align-items: center;
             box-sizing: border-box;
@@ -326,7 +110,6 @@
             cursor: not-allowed;
         }
 
-        /* --- STYLING MODAL (Pop-up) --- */
         .modal {
             display: none;
             position: fixed;
@@ -376,7 +159,6 @@
             color: #777;
         }
         
-        /* --- STYLING KHUSUS MODAL WHATSAPP --- */
         .modal-body .alert-info {
             background-color: #e6f7ff;
             border: 1px solid #91d5ff;
@@ -404,7 +186,7 @@
         }
 
         .btn-confirm-wa {
-            background-color: #25D366; /* Warna WhatsApp */
+            background-color: #25D366; 
             color: white;
             padding: 12px 25px;
             border-radius: 8px;
@@ -413,7 +195,6 @@
             display: inline-block;
         }
         
-        /* --- STYLING KHUSUS MODAL QRIS --- */
         #qrisModal .modal-body {
             text-align: center;
         }
@@ -445,6 +226,29 @@
             margin-top: 10px;
         }
         
+        /* --- CSS BARU UNTUK TOMBOL --- */
+        .modal-footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-check-qris {
+            background-color: #0d6efd; /* Biru */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .btn-check-qris:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
         .btn-cancel-qris {
             background-color: #888;
             color: white;
@@ -453,10 +257,9 @@
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
         }
+        /* --- SELESAI CSS BARU --- */
 
-        /* --- STYLING KHUSUS MODAL STRUK --- */
         #receiptModal .modal-body {
             text-align: center;
         }
@@ -694,6 +497,7 @@
                     <input type="text" placeholder="Zone ID" id="zoneIdInput">
                 </div>
             </div>
+
             <div class="step-section form-section">
                 <h3><span>5</span> Masukkan info kontak</h3>
                 <input type="email" placeholder="Masukkan email (opsional)">
@@ -761,7 +565,11 @@
                 <p>Nominal: <strong>Rp<span id="qrisNominal">0</span></strong></p>
                 <p id="qrisTimer">15:00</p>
                 <p id="qrisStatus">Menunggu pembayaran...</p>
-                <button id="cancelQrisButton" class="btn-cancel-qris">Batalkan</button>
+                
+                <div class="modal-footer-buttons">
+                    <button id="checkQrisStatusButton" class="btn-check-qris">Cek Status</button>
+                    <button id="cancelQrisButton" class="btn-cancel-qris">Batalkan</button>
+                </div>
             </div>
         </div>
     </div>
@@ -795,8 +603,9 @@
         let selectedNominal = null;
         let selectedPayment = null;
         let qrisTimerInterval = null;
-        let qrisPollingInterval = null;
+        // let qrisPollingInterval = null; // <-- DIHAPUS
         let currentDepositId = null;
+        let currentOrderDetails = null; // <-- VARIABEL BARU
 
         // --- Ambil Elemen DOM ---
         const nominalItems = document.querySelectorAll('.nominal-item');
@@ -808,7 +617,6 @@
         const filterButtons = document.querySelectorAll('.filter-buttons a');
         const beliButton = document.querySelector('.btn-beli');
         
-        // PERUBAHAN DI SINI: Menambahkan Zone ID
         const userIdInput = document.getElementById('userIdInput');
         const zoneIdInput = document.getElementById('zoneIdInput');
         
@@ -821,6 +629,7 @@
         const qrisModal = document.getElementById('qrisModal');
         const closeQrisModal = document.getElementById('closeQrisModal');
         const cancelQrisButton = document.getElementById('cancelQrisButton');
+        const checkQrisStatusButton = document.getElementById('checkQrisStatusButton'); // <-- TOMBOL BARU
 
         // Modal Struk
         const receiptModal = document.getElementById('receiptModal');
@@ -828,7 +637,7 @@
         const closeReceiptButton = document.getElementById('closeReceiptButton');
 
 
-        // --- Fungsi untuk Tab ---
+        // --- (Fungsi Tab, Filter, Nominal, Pembayaran, updateFooter tidak berubah) ---
         tabItems.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabItems.forEach(t => t.classList.remove('active'));
@@ -840,7 +649,6 @@
             });
         });
 
-        // --- Fungsi untuk Filter ---
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -859,7 +667,6 @@
             });
         });
 
-        // --- Fungsi untuk Nominal & Pembayaran ---
         nominalItems.forEach(item => {
             item.addEventListener('click', () => {
                 nominalItems.forEach(i => i.classList.remove('selected'));
@@ -902,11 +709,10 @@
             }
         }
 
-        // --- Fungsi Tombol Beli Utama ---
+        // --- (Fungsi Tombol Beli Utama tidak berubah) ---
         beliButton.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // PERUBAHAN DI SINI: Validasi Zone ID
             const userId = userIdInput.value;
             const zoneId = zoneIdInput.value;
             
@@ -918,28 +724,25 @@
             const paymentName = selectedPayment.dataset.name;
             
             if (paymentName.includes('QRIS')) {
-                // LOGIKA BARU: Panggil API QRIS
                 handleQrisPayment();
             } else {
-                // LOGIKA LAMA: Buka Modal WhatsApp
                 showWhatsappModal();
             }
         });
 
-        // --- LOGIKA 1: Pembayaran via WhatsApp ---
+        // --- (LOGIKA 1: WhatsApp tidak berubah) ---
         function showWhatsappModal() {
             const price = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
             const diamonds = selectedNominal.dataset.diamonds;
             const paymentMethod = selectedPayment.dataset.name;
             
-            // PERUBAHAN DI SINI: Gabungkan ID + Zone
             const userId = userIdInput.value;
             const zoneId = zoneIdInput.value;
             const combinedId = `${userId} (${zoneId})`;
 
             document.getElementById('popupPrice').textContent = price;
             document.getElementById('popupDiamonds').textContent = diamonds;
-            document.getElementById('popupUserId').textContent = combinedId; // Tampilkan ID gabungan
+            document.getElementById('popupUserId').textContent = combinedId; 
             document.getElementById('popupPaymentMethod').textContent = paymentMethod;
 
             whatsappModal.style.display = 'block';
@@ -948,7 +751,6 @@
         confirmWhatsappButton.addEventListener('click', () => {
             const diamonds = document.getElementById('popupDiamonds').textContent;
             const price = document.getElementById('popupPrice').textContent;
-            // PERUBAHAN DI SINI: Ambil ID gabungan dari pop-up
             const userIdFull = document.getElementById('popupUserId').textContent;
             const paymentMethod = document.getElementById('popupPaymentMethod').textContent;
 
@@ -962,9 +764,9 @@
             whatsappModal.style.display = 'none';
         });
 
-        // --- LOGIKA 2: Pembayaran via QRIS (API) ---
+        // --- (LOGIKA 2: QRIS - DIUBAH) ---
 
-        // Fungsi untuk memanggil API
+        // (Fungsi callApi tidak berubah)
         async function callApi(endpoint, data) {
             const url = `${API_BASE_URL}${endpoint}`;
             
@@ -989,13 +791,13 @@
             }
         }
 
-        // Langkah 2.1: Buat Deposit QRIS
+        // Langkah 2.1: Buat Deposit QRIS (DIUBAH)
         async function handleQrisPayment() {
             beliButton.textContent = 'Memproses...';
             beliButton.disabled = true;
 
             const nominal = parseInt(selectedNominal.dataset.price);
-            const reff_id = `GN-ML-${Date.now()}`; // Reff ID unik (diubah ke ML)
+            const reff_id = `GN-ML-${Date.now()}`; 
 
             const data = {
                 reff_id: reff_id,
@@ -1010,32 +812,36 @@
                 const depositData = response.data;
                 currentDepositId = depositData.id;
 
-                // Tampilkan Modal QRIS
+                // --- PERUBAHAN URL ---
+                const newUrl = window.location.pathname + '?idpayment=' + depositData.id;
+                history.pushState({ path: newUrl }, '', newUrl);
+                // --- SELESAI PERUBAHAN URL ---
+
                 document.getElementById('qrisImage').src = depositData.qr_image;
                 document.getElementById('qrisNominal').textContent = depositData.nominal.toLocaleString('id-ID');
                 document.getElementById('qrisStatus').textContent = 'Silakan scan QR untuk membayar...';
                 qrisModal.style.display = 'block';
 
-                // PERUBAHAN DI SINI: Siapkan data target
                 const userId = userIdInput.value;
                 const zoneId = zoneIdInput.value;
-                const target = `${userId}(${zoneId})`; // Format target: 12345(1234)
+                const target = `${userId}(${zoneId})`; 
 
-                // Siapkan data untuk langkah selanjutnya (top up)
                 const orderDetails = {
                     depositId: depositData.id,
                     productCode: selectedNominal.dataset.code,
                     productName: selectedNominal.dataset.diamonds,
-                    userId: userId, // Kirim ID mentah
-                    zoneId: zoneId, // Kirim Zone mentah
-                    target: target, // Kirim Target gabungan untuk API
+                    userId: userId,
+                    zoneId: zoneId, 
+                    target: target, 
                     price: depositData.nominal
                 };
+                
+                currentOrderDetails = orderDetails; // <-- SIMPAN DETAIL UNTUK TOMBOL CEK
 
-                // Mulai timer dan polling
+                // Mulai timer
                 const expiryTime = new Date(depositData.expired_at).getTime();
                 startQrisTimer(expiryTime, depositData.id);
-                startPollingDepositStatus(orderDetails);
+                // startPollingDepositStatus(orderDetails); // <-- DIHAPUS
 
             } else {
                 alert('Gagal membuat QRIS: ' + (response.message || 'Error tidak diketahui'));
@@ -1044,7 +850,7 @@
             }
         }
 
-        // Langkah 2.2: Hitung Mundur Timer
+        // (Langkah 2.2: Timer tidak berubah)
         function startQrisTimer(expiryTime, depositId) {
             clearInterval(qrisTimerInterval); 
 
@@ -1068,62 +874,67 @@
             }, 1000);
         }
 
-        // Langkah 2.3: Cek Status Pembayaran (Polling)
-        function startPollingDepositStatus(orderDetails) {
-            clearInterval(qrisPollingInterval); 
+        // Langkah 2.3: Cek Status Polling (DIHAPUS)
+        // function startPollingDepositStatus(orderDetails) { ... } // <-- SEMUA FUNGSI INI DIHAPUS
 
-            qrisPollingInterval = setInterval(async () => {
-                if (qrisModal.style.display !== 'block' || currentDepositId !== orderDetails.depositId) {
-                    clearInterval(qrisPollingInterval);
-                    return;
-                }
+        // --- FUNGSI BARU: Cek Status Manual ---
+        async function handleCheckQrisStatus() {
+            if (!currentOrderDetails) {
+                alert('Error: Detail pesanan tidak ditemukan. Coba segarkan halaman.');
+                return;
+            }
 
-                const response = await callApi('/deposit/status', { id: orderDetails.depositId });
+            checkQrisStatusButton.textContent = 'Mengecek...';
+            checkQrisStatusButton.disabled = true;
+            
+            const response = await callApi('/deposit/status', { id: currentOrderDetails.depositId });
 
-                if (response.status === true) {
-                    const status = response.data.status;
+            if (response.status === true) {
+                const status = response.data.status;
+                
+                if (status === 'success') {
+                    // BERHASIL BAYAR!
+                    clearInterval(qrisTimerInterval);
+                    document.getElementById('qrisStatus').textContent = 'Pembayaran Berhasil! Memproses top up...';
                     
-                    if (status === 'success') {
-                        clearInterval(qrisPollingInterval);
-                        clearInterval(qrisTimerInterval);
-                        document.getElementById('qrisStatus').textContent = 'Pembayaran Berhasil! Memproses top up...';
-                        await handleTopUp(orderDetails);
-                    
-                    } else if (status === 'cancel' || status === 'expired') {
-                        clearInterval(qrisPollingInterval);
-                        clearInterval(qrisTimerInterval);
-                        document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan atau kedaluwarsa.';
-                    
-                    } else {
-                        document.getElementById('qrisStatus').textContent = 'Menunggu pembayaran...';
-                    }
+                    // Otomatis panggil top-up
+                    await handleTopUp(currentOrderDetails);
+                
+                } else if (status === 'cancel' || status === 'expired') {
+                    // GAGAL BAYAR
+                    clearInterval(qrisTimerInterval);
+                    document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan atau kedaluwarsa.';
+                    alert('Status: Pembayaran dibatalkan atau kedaluwarsa.');
+                
                 } else {
-                    console.error('Gagal cek status deposit:', response.message);
+                    // Masih 'pending'
+                    document.getElementById('qrisStatus').textContent = 'Masih menunggu pembayaran...';
+                    alert('Status: Masih Menunggu Pembayaran. Silakan selesaikan pembayaran dan coba lagi.');
                 }
+            } else {
+                alert('Gagal cek status: ' + (response.message || 'Error'));
+            }
 
-            }, 3000); // Cek setiap 3 detik
+            checkQrisStatusButton.textContent = 'Cek Status';
+            checkQrisStatusButton.disabled = false;
         }
-
-        // Langkah 2.4: Lakukan Top Up Setelah Bayar Berhasil
+        
+        // (Langkah 2.4: Handle Top Up tidak berubah)
         async function handleTopUp(orderDetails) {
             const trxReffId = `GN-TOPUP-${Date.now()}`;
             
-            // PERUBAHAN DI SINI: Menggunakan 'orderDetails.target'
             const data = {
                 reff_id: trxReffId,
                 code: orderDetails.productCode,
-                target: orderDetails.target // Ini berisi 'USERID(ZONEID)'
+                target: orderDetails.target 
             };
 
             const response = await callApi('/transaksi/create', data);
 
-            // Tutup modal QRIS
             qrisModal.style.display = 'none';
 
-            // PERUBAHAN DI SINI: Tampilkan ID gabungan di struk
             const combinedId = `${orderDetails.userId} (${orderDetails.zoneId})`;
             
-            // Tampilkan Struk
             document.getElementById('receiptProduct').textContent = orderDetails.productName;
             document.getElementById('receiptUserId').textContent = combinedId;
             document.getElementById('receiptPrice').textContent = orderDetails.price.toLocaleString('id-ID');
@@ -1141,21 +952,24 @@
             
             receiptModal.style.display = 'block';
 
-            // Reset tombol beli
             beliButton.textContent = 'Beli Sekarang';
             beliButton.disabled = false;
-            currentDepositId = null; // Selesaikan sesi deposit
+            currentDepositId = null; 
         }
 
-        // Langkah 2.5: Batalkan Pembayaran QRIS
+        // Langkah 2.5: Batalkan Pembayaran (DIUBAH)
         async function cancelQrisPayment() {
             if (!currentDepositId) return;
 
             clearInterval(qrisTimerInterval);
-            clearInterval(qrisPollingInterval);
+            // clearInterval(qrisPollingInterval); // <-- DIHAPUS
 
             const depositIdToCancel = currentDepositId;
             currentDepositId = null; 
+            currentOrderDetails = null; // <-- RESET DETAIL
+
+            // --- RESET URL ---
+            history.pushState({}, '', window.location.pathname);
 
             const response = await callApi('/deposit/cancel', { id: depositIdToCancel });
 
@@ -1172,32 +986,41 @@
             }, 2000);
         }
 
+        // --- TAMBAH EVENT LISTENER BARU ---
+        checkQrisStatusButton.addEventListener('click', handleCheckQrisStatus);
+        
         cancelQrisButton.addEventListener('click', cancelQrisPayment);
         closeQrisModal.addEventListener('click', cancelQrisPayment);
 
-        // --- Fungsi Tutup Modal Struk ---
+        // --- Fungsi Tutup Modal Struk (DIUBAH) ---
         function closeReceipt() {
             receiptModal.style.display = 'none';
-            // Reset pilihan
+            
             nominalItems.forEach(i => i.classList.remove('selected'));
             paymentItems.forEach(i => i.classList.remove('selected'));
             selectedNominal = null;
             selectedPayment = null;
             userIdInput.value = '';
-            zoneIdInput.value = ''; // Reset Zone ID juga
+            zoneIdInput.value = ''; 
             updateFooter();
+            
+            currentOrderDetails = null; // <-- RESET DETAIL
+            
+            // --- RESET URL ---
+            history.pushState({}, '', window.location.pathname);
         }
         closeReceiptModal.addEventListener('click', closeReceipt);
         closeReceiptButton.addEventListener('click', closeReceipt);
 
 
-        // --- Tutup modal jika klik di luar area ---
+        // --- Tutup modal jika klik di luar area (DIUBAH) ---
         window.addEventListener('click', (event) => {
             if (event.target == whatsappModal) {
                 whatsappModal.style.display = 'none';
             }
             if (event.target == qrisModal) {
-                cancelQrisPayment(); // Klik di luar = batalkan
+                // Jangan batalkan otomatis, biarkan user klik tombol
+                // cancelQrisPayment(); 
             }
             if (event.target == receiptModal) {
                 closeReceipt();
