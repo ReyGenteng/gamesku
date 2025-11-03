@@ -14,8 +14,223 @@
             padding-bottom: 80px;
         }
 
-        /* ... (CSS Lainnya tidak berubah) ... */
+        header {
+            background-color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            height: 30px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icons img {
+            width: 24px;
+            cursor: pointer;
+        }
         
+        .header-icons .btn-masuk {
+            padding: 8px 15px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .breadcrumbs {
+            padding: 15px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: #888;
+        }
+
+        .game-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .game-info img {
+            width: 60px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .game-info h2 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .game-info p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #ff4500;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            background-color: #fff;
+        }
+        
+        .tab-item {
+            flex-grow: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-item.active {
+            color: #ff4500;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #ff4500;
+        }
+        
+        .content-tab {
+            display: none;
+        }
+        
+        .content-tab.active {
+            display: block;
+        }
+
+        .step-section {
+            padding: 15px;
+        }
+
+        .step-section h3 {
+            font-size: 1em;
+            color: #ff4500;
+            margin-bottom: 10px;
+        }
+
+        .step-section h3 span {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .info-bar {
+            background-color: #ffedf0;
+            color: #ff4500;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-buttons a {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .filter-buttons a.active {
+            background-color: #ff4500;
+            color: white;
+            border-color: #ff4500;
+        }
+        
+        .nominal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .nominal-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .nominal-item.selected {
+            border: 2px solid #ff4500;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
+        }
+
+        .nominal-item h4 {
+            margin: 0;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nominal-item h4 img {
+            width: 20px;
+        }
+
+        .nominal-item p {
+            margin: 5px 0 0;
+            font-size: 1em;
+            font-weight: bold;
+            color: #ff4500;
+        }
+        
+        .form-section {
+            background-color: #fff;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-section h3 {
+            font-size: 1.1em;
+            color: #ff4500;
+            margin-bottom: 10px;
+        }
+
         .form-section input {
             width: calc(100% - 20px);
             padding: 10px;
@@ -226,29 +441,6 @@
             margin-top: 10px;
         }
         
-        /* --- CSS BARU UNTUK TOMBOL --- */
-        .modal-footer-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .btn-check-qris {
-            background-color: #0d6efd; /* Biru */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .btn-check-qris:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
         .btn-cancel-qris {
             background-color: #888;
             color: white;
@@ -257,8 +449,8 @@
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 15px;
         }
-        /* --- SELESAI CSS BARU --- */
 
         #receiptModal .modal-body {
             text-align: center;
@@ -340,9 +532,9 @@
                 </div>
 
                 <div class="nominal-grid">
-                    <div class="nominal-item" data-price="2004" data-code="ML3" data-diamonds="3 Diamond" data-category="all">
+                    <div class="nominal-item" data-price="1000" data-code="ML3" data-diamonds="3 Diamond" data-category="all">
                         <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 3 Diamond</h4>
-                        <p>Rp2.004</p>
+                        <p>Rp1.000</p>
                     </div>
                     <div class="nominal-item" data-price="4444" data-code="ML5" data-diamonds="5 Diamond" data-category="all">
                         <h4><img src="https://reygenteng.github.io/gamesku/dmml.png" alt="Diamond Icon"> 5 Diamond</h4>
@@ -497,7 +689,6 @@
                     <input type="text" placeholder="Zone ID" id="zoneIdInput">
                 </div>
             </div>
-
             <div class="step-section form-section">
                 <h3><span>5</span> Masukkan info kontak</h3>
                 <input type="email" placeholder="Masukkan email (opsional)">
@@ -565,11 +756,7 @@
                 <p>Nominal: <strong>Rp<span id="qrisNominal">0</span></strong></p>
                 <p id="qrisTimer">15:00</p>
                 <p id="qrisStatus">Menunggu pembayaran...</p>
-                
-                <div class="modal-footer-buttons">
-                    <button id="checkQrisStatusButton" class="btn-check-qris">Cek Status</button>
-                    <button id="cancelQrisButton" class="btn-cancel-qris">Batalkan</button>
-                </div>
+                <button id="cancelQrisButton" class="btn-cancel-qris">Batalkan</button>
             </div>
         </div>
     </div>
@@ -603,11 +790,10 @@
         let selectedNominal = null;
         let selectedPayment = null;
         let qrisTimerInterval = null;
-        // let qrisPollingInterval = null; // <-- DIHAPUS
+        let qrisPollingInterval = null;
         let currentDepositId = null;
-        let currentOrderDetails = null; // <-- VARIABEL BARU
 
-        // --- Ambil Elemen DOM ---
+        // --- (Ambil Elemen DOM tidak berubah) ---
         const nominalItems = document.querySelectorAll('.nominal-item');
         const paymentItems = document.querySelectorAll('.payment-item');
         const finalPriceElement = document.getElementById('finalPrice');
@@ -620,29 +806,23 @@
         const userIdInput = document.getElementById('userIdInput');
         const zoneIdInput = document.getElementById('zoneIdInput');
         
-        // Modal WhatsApp
         const whatsappModal = document.getElementById('whatsappModal');
         const closeWhatsappModal = document.getElementById('closeWhatsappModal');
         const confirmWhatsappButton = document.getElementById('confirmWhatsappButton');
 
-        // Modal QRIS
         const qrisModal = document.getElementById('qrisModal');
         const closeQrisModal = document.getElementById('closeQrisModal');
         const cancelQrisButton = document.getElementById('cancelQrisButton');
-        const checkQrisStatusButton = document.getElementById('checkQrisStatusButton'); // <-- TOMBOL BARU
 
-        // Modal Struk
         const receiptModal = document.getElementById('receiptModal');
         const closeReceiptModal = document.getElementById('closeReceiptModal');
         const closeReceiptButton = document.getElementById('closeReceiptButton');
-
 
         // --- (Fungsi Tab, Filter, Nominal, Pembayaran, updateFooter tidak berubah) ---
         tabItems.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabItems.forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.content-tab').forEach(c => c.classList.remove('active'));
-
                 const tabId = tab.dataset.tab;
                 tab.classList.add('active');
                 document.getElementById(`${tabId}-content`).classList.add('active');
@@ -654,7 +834,6 @@
                 e.preventDefault();
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
                 const filter = button.dataset.filter;
                 nominalItems.forEach(item => {
                     const categories = item.dataset.category || "all";
@@ -689,7 +868,6 @@
             let price = 0;
             let diamonds = "Pilih Produk";
             let payment = "Pilih Pembayaran";
-
             if (selectedNominal) {
                 price = parseInt(selectedNominal.dataset.price);
                 diamonds = selectedNominal.dataset.diamonds;
@@ -697,11 +875,9 @@
             if (selectedPayment) {
                 payment = selectedPayment.dataset.name;
             }
-
             finalPriceElement.textContent = price.toLocaleString('id-ID');
             finalDiamondsElement.textContent = diamonds;
             finalPaymentElement.textContent = payment;
-
             if (selectedNominal && selectedPayment) {
                 document.querySelector('.sticky-footer').style.display = 'flex';
             } else {
@@ -712,17 +888,13 @@
         // --- (Fungsi Tombol Beli Utama tidak berubah) ---
         beliButton.addEventListener('click', (e) => {
             e.preventDefault();
-            
             const userId = userIdInput.value;
             const zoneId = zoneIdInput.value;
-            
             if (!selectedNominal || !selectedPayment || !userId || !zoneId) {
                 alert('Mohon lengkapi semua data: nominal, metode bayar, User ID, dan Zone ID.');
                 return;
             }
-            
             const paymentName = selectedPayment.dataset.name;
-            
             if (paymentName.includes('QRIS')) {
                 handleQrisPayment();
             } else {
@@ -735,47 +907,38 @@
             const price = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
             const diamonds = selectedNominal.dataset.diamonds;
             const paymentMethod = selectedPayment.dataset.name;
-            
             const userId = userIdInput.value;
             const zoneId = zoneIdInput.value;
             const combinedId = `${userId} (${zoneId})`;
-
             document.getElementById('popupPrice').textContent = price;
             document.getElementById('popupDiamonds').textContent = diamonds;
             document.getElementById('popupUserId').textContent = combinedId; 
             document.getElementById('popupPaymentMethod').textContent = paymentMethod;
-
             whatsappModal.style.display = 'block';
         }
-
         confirmWhatsappButton.addEventListener('click', () => {
             const diamonds = document.getElementById('popupDiamonds').textContent;
             const price = document.getElementById('popupPrice').textContent;
             const userIdFull = document.getElementById('popupUserId').textContent;
             const paymentMethod = document.getElementById('popupPaymentMethod').textContent;
-
             const waText = `Halo Kak, mau top up ${diamonds} seharga Rp${price} (User ID: ${userIdFull}). Bayar via ${paymentMethod}.`;
             const waUrl = `https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(waText)}`;
-
             window.location.href = waUrl;
         });
-
         closeWhatsappModal.addEventListener('click', () => {
             whatsappModal.style.display = 'none';
         });
 
-        // --- (LOGIKA 2: QRIS - DIUBAH) ---
+        // --- LOGIKA 2: Pembayaran via QRIS (API) ---
 
         // (Fungsi callApi tidak berubah)
         async function callApi(endpoint, data) {
             const url = `${API_BASE_URL}${endpoint}`;
-            
             const body = new URLSearchParams();
             for (const key in data) {
                 body.append(key, data[key]);
             }
             body.append('api_key', API_KEY);
-
             try {
                 const response = await fetch(url, {
                     method: 'POST',
@@ -791,14 +954,13 @@
             }
         }
 
-        // Langkah 2.1: Buat Deposit QRIS (DIUBAH)
+        // --- Langkah 2.1: Buat Deposit QRIS (DIUBAH) ---
         async function handleQrisPayment() {
             beliButton.textContent = 'Memproses...';
             beliButton.disabled = true;
 
             const nominal = parseInt(selectedNominal.dataset.price);
             const reff_id = `GN-ML-${Date.now()}`; 
-
             const data = {
                 reff_id: reff_id,
                 nominal: nominal,
@@ -812,7 +974,7 @@
                 const depositData = response.data;
                 currentDepositId = depositData.id;
 
-                // --- PERUBAHAN URL ---
+                // --- PERUBAHAN URL: TAMBAHKAN PARAMETER ---
                 const newUrl = window.location.pathname + '?idpayment=' + depositData.id;
                 history.pushState({ path: newUrl }, '', newUrl);
                 // --- SELESAI PERUBAHAN URL ---
@@ -825,23 +987,19 @@
                 const userId = userIdInput.value;
                 const zoneId = zoneIdInput.value;
                 const target = `${userId}(${zoneId})`; 
-
                 const orderDetails = {
                     depositId: depositData.id,
                     productCode: selectedNominal.dataset.code,
                     productName: selectedNominal.dataset.diamonds,
-                    userId: userId,
+                    userId: userId, 
                     zoneId: zoneId, 
                     target: target, 
                     price: depositData.nominal
                 };
-                
-                currentOrderDetails = orderDetails; // <-- SIMPAN DETAIL UNTUK TOMBOL CEK
 
-                // Mulai timer
                 const expiryTime = new Date(depositData.expired_at).getTime();
                 startQrisTimer(expiryTime, depositData.id);
-                // startPollingDepositStatus(orderDetails); // <-- DIHAPUS
+                startPollingDepositStatus(orderDetails);
 
             } else {
                 alert('Gagal membuat QRIS: ' + (response.message || 'Error tidak diketahui'));
@@ -874,51 +1032,42 @@
             }, 1000);
         }
 
-        // Langkah 2.3: Cek Status Polling (DIHAPUS)
-        // function startPollingDepositStatus(orderDetails) { ... } // <-- SEMUA FUNGSI INI DIHAPUS
+        // --- Langkah 2.3: Polling (DIUBAH) ---
+        function startPollingDepositStatus(orderDetails) {
+            clearInterval(qrisPollingInterval); 
 
-        // --- FUNGSI BARU: Cek Status Manual ---
-        async function handleCheckQrisStatus() {
-            if (!currentOrderDetails) {
-                alert('Error: Detail pesanan tidak ditemukan. Coba segarkan halaman.');
-                return;
-            }
-
-            checkQrisStatusButton.textContent = 'Mengecek...';
-            checkQrisStatusButton.disabled = true;
-            
-            const response = await callApi('/deposit/status', { id: currentOrderDetails.depositId });
-
-            if (response.status === true) {
-                const status = response.data.status;
-                
-                if (status === 'success') {
-                    // BERHASIL BAYAR!
-                    clearInterval(qrisTimerInterval);
-                    document.getElementById('qrisStatus').textContent = 'Pembayaran Berhasil! Memproses top up...';
-                    
-                    // Otomatis panggil top-up
-                    await handleTopUp(currentOrderDetails);
-                
-                } else if (status === 'cancel' || status === 'expired') {
-                    // GAGAL BAYAR
-                    clearInterval(qrisTimerInterval);
-                    document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan atau kedaluwarsa.';
-                    alert('Status: Pembayaran dibatalkan atau kedaluwarsa.');
-                
-                } else {
-                    // Masih 'pending'
-                    document.getElementById('qrisStatus').textContent = 'Masih menunggu pembayaran...';
-                    alert('Status: Masih Menunggu Pembayaran. Silakan selesaikan pembayaran dan coba lagi.');
+            qrisPollingInterval = setInterval(async () => {
+                if (qrisModal.style.display !== 'block' || currentDepositId !== orderDetails.depositId) {
+                    clearInterval(qrisPollingInterval);
+                    return;
                 }
-            } else {
-                alert('Gagal cek status: ' + (response.message || 'Error'));
-            }
 
-            checkQrisStatusButton.textContent = 'Cek Status';
-            checkQrisStatusButton.disabled = false;
+                const response = await callApi('/deposit/status', { id: orderDetails.depositId });
+
+                if (response.status === true) {
+                    const status = response.data.status;
+                    
+                    if (status === 'success') {
+                        clearInterval(qrisPollingInterval);
+                        clearInterval(qrisTimerInterval);
+                        document.getElementById('qrisStatus').textContent = 'Pembayaran Berhasil! Memproses top up...';
+                        await handleTopUp(orderDetails);
+                    
+                    } else if (status === 'cancel' || status === 'expired') {
+                        clearInterval(qrisPollingInterval);
+                        clearInterval(qrisTimerInterval);
+                        document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan atau kedaluwarsa.';
+                    
+                    } else {
+                        document.getElementById('qrisStatus').textContent = 'Menunggu pembayaran...';
+                    }
+                } else {
+                    console.error('Gagal cek status deposit:', response.message);
+                }
+            // --- PERUBAHAN INTERVAL: DARI 3000 MENJADI 1000 ---
+            }, 1000); // Cek setiap 1 detik ("selalu/on time")
         }
-        
+
         // (Langkah 2.4: Handle Top Up tidak berubah)
         async function handleTopUp(orderDetails) {
             const trxReffId = `GN-TOPUP-${Date.now()}`;
@@ -957,19 +1106,19 @@
             currentDepositId = null; 
         }
 
-        // Langkah 2.5: Batalkan Pembayaran (DIUBAH)
+        // --- Langkah 2.5: Batalkan Pembayaran (DIUBAH) ---
         async function cancelQrisPayment() {
             if (!currentDepositId) return;
 
             clearInterval(qrisTimerInterval);
-            // clearInterval(qrisPollingInterval); // <-- DIHAPUS
+            clearInterval(qrisPollingInterval);
+
+            // --- PERUBAHAN URL: HAPUS PARAMETER SAAT BATAL ---
+            history.pushState({}, '', window.location.pathname);
+            // --- SELESAI PERUBAHAN URL ---
 
             const depositIdToCancel = currentDepositId;
             currentDepositId = null; 
-            currentOrderDetails = null; // <-- RESET DETAIL
-
-            // --- RESET URL ---
-            history.pushState({}, '', window.location.pathname);
 
             const response = await callApi('/deposit/cancel', { id: depositIdToCancel });
 
@@ -986,16 +1135,13 @@
             }, 2000);
         }
 
-        // --- TAMBAH EVENT LISTENER BARU ---
-        checkQrisStatusButton.addEventListener('click', handleCheckQrisStatus);
-        
         cancelQrisButton.addEventListener('click', cancelQrisPayment);
         closeQrisModal.addEventListener('click', cancelQrisPayment);
 
         // --- Fungsi Tutup Modal Struk (DIUBAH) ---
         function closeReceipt() {
             receiptModal.style.display = 'none';
-            
+            // Reset pilihan
             nominalItems.forEach(i => i.classList.remove('selected'));
             paymentItems.forEach(i => i.classList.remove('selected'));
             selectedNominal = null;
@@ -1003,11 +1149,8 @@
             userIdInput.value = '';
             zoneIdInput.value = ''; 
             updateFooter();
-            
-            currentOrderDetails = null; // <-- RESET DETAIL
-            
-            // --- RESET URL ---
-            history.pushState({}, '', window.location.pathname);
+            // --- PERMINTAAN: JANGAN HAPUS URL PARAMETER ---
+            // history.pushState({}, '', window.location.pathname); // Baris ini tidak ditambahkan
         }
         closeReceiptModal.addEventListener('click', closeReceipt);
         closeReceiptButton.addEventListener('click', closeReceipt);
@@ -1019,8 +1162,8 @@
                 whatsappModal.style.display = 'none';
             }
             if (event.target == qrisModal) {
-                // Jangan batalkan otomatis, biarkan user klik tombol
-                // cancelQrisPayment(); 
+                // --- PERUBAHAN: Klik di luar = batalkan (kembali seperti semula) ---
+                cancelQrisPayment(); 
             }
             if (event.target == receiptModal) {
                 closeReceipt();
