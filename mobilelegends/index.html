@@ -902,24 +902,27 @@
             }
         });
 
-        // --- (LOGIKA 1: WhatsApp tidak berubah) ---
+        // --- LOGIKA 1: WhatsApp (DIUBAH) ---
         function showWhatsappModal() {
             const price = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
             const diamonds = selectedNominal.dataset.diamonds;
             const paymentMethod = selectedPayment.dataset.name;
             const userId = userIdInput.value;
             const zoneId = zoneIdInput.value;
-            const combinedId = `${userId} (${zoneId})`;
+            
+            // --- PERUBAHAN FORMAT ---
+            const combinedId = `${userId}|${zoneId}`;
+            
             document.getElementById('popupPrice').textContent = price;
             document.getElementById('popupDiamonds').textContent = diamonds;
-            document.getElementById('popupUserId').textContent = combinedId; 
+            document.getElementById('popupUserId').textContent = combinedId; // Format baru
             document.getElementById('popupPaymentMethod').textContent = paymentMethod;
             whatsappModal.style.display = 'block';
         }
         confirmWhatsappButton.addEventListener('click', () => {
             const diamonds = document.getElementById('popupDiamonds').textContent;
             const price = document.getElementById('popupPrice').textContent;
-            const userIdFull = document.getElementById('popupUserId').textContent;
+            const userIdFull = document.getElementById('popupUserId').textContent; // Sudah format ID|ZONEID
             const paymentMethod = document.getElementById('popupPaymentMethod').textContent;
             const waText = `Halo Kak, mau top up ${diamonds} seharga Rp${price} (User ID: ${userIdFull}). Bayar via ${paymentMethod}.`;
             const waUrl = `https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(waText)}`;
@@ -974,10 +977,8 @@
                 const depositData = response.data;
                 currentDepositId = depositData.id;
 
-                // --- PERUBAHAN URL: TAMBAHKAN PARAMETER ---
                 const newUrl = window.location.pathname + '?idpayment=' + depositData.id;
                 history.pushState({ path: newUrl }, '', newUrl);
-                // --- SELESAI PERUBAHAN URL ---
 
                 document.getElementById('qrisImage').src = depositData.qr_image;
                 document.getElementById('qrisNominal').textContent = depositData.nominal.toLocaleString('id-ID');
@@ -986,14 +987,17 @@
 
                 const userId = userIdInput.value;
                 const zoneId = zoneIdInput.value;
-                const target = `${userId}(${zoneId})`; 
+                
+                // --- PERUBAHAN FORMAT ---
+                const target = `${userId}|${zoneId}`; 
+                
                 const orderDetails = {
                     depositId: depositData.id,
                     productCode: selectedNominal.dataset.code,
                     productName: selectedNominal.dataset.diamonds,
                     userId: userId, 
                     zoneId: zoneId, 
-                    target: target, 
+                    target: target, // Sekarang formatnya sudah ID|ZONEID
                     price: depositData.nominal
                 };
 
@@ -1032,7 +1036,7 @@
             }, 1000);
         }
 
-        // --- Langkah 2.3: Polling (DIUBAH) ---
+        // --- Langkah 2.3: Polling (Interval 1 detik) ---
         function startPollingDepositStatus(orderDetails) {
             clearInterval(qrisPollingInterval); 
 
@@ -1064,8 +1068,7 @@
                 } else {
                     console.error('Gagal cek status deposit:', response.message);
                 }
-            // --- PERUBAHAN INTERVAL: DARI 3000 MENJADI 1000 ---
-            }, 1000); // Cek setiap 1 detik ("selalu/on time")
+            }, 1000); // Cek setiap 1 detik
         }
 
         // (Langkah 2.4: Handle Top Up tidak berubah)
@@ -1075,17 +1078,18 @@
             const data = {
                 reff_id: trxReffId,
                 code: orderDetails.productCode,
-                target: orderDetails.target 
+                target: orderDetails.target // Ini sudah format ID|ZONEID
             };
 
             const response = await callApi('/transaksi/create', data);
 
             qrisModal.style.display = 'none';
 
-            const combinedId = `${orderDetails.userId} (${orderDetails.zoneId})`;
+            // --- PERUBAHAN FORMAT ---
+            const combinedId = `${orderDetails.userId}|${orderDetails.zoneId}`;
             
             document.getElementById('receiptProduct').textContent = orderDetails.productName;
-            document.getElementById('receiptUserId').textContent = combinedId;
+            document.getElementById('receiptUserId').textContent = combinedId; // Format baru
             document.getElementById('receiptPrice').textContent = orderDetails.price.toLocaleString('id-ID');
             document.getElementById('receiptPayment').textContent = 'QRIS';
 
@@ -1106,16 +1110,14 @@
             currentDepositId = null; 
         }
 
-        // --- Langkah 2.5: Batalkan Pembayaran (DIUBAH) ---
+        // (Langkah 2.5: Batalkan Pembayaran tidak berubah)
         async function cancelQrisPayment() {
             if (!currentDepositId) return;
 
             clearInterval(qrisTimerInterval);
             clearInterval(qrisPollingInterval);
 
-            // --- PERUBAHAN URL: HAPUS PARAMETER SAAT BATAL ---
             history.pushState({}, '', window.location.pathname);
-            // --- SELESAI PERUBAHAN URL ---
 
             const depositIdToCancel = currentDepositId;
             currentDepositId = null; 
@@ -1138,7 +1140,7 @@
         cancelQrisButton.addEventListener('click', cancelQrisPayment);
         closeQrisModal.addEventListener('click', cancelQrisPayment);
 
-        // --- Fungsi Tutup Modal Struk (DIUBAH) ---
+        // (Fungsi Tutup Modal Struk tidak berubah)
         function closeReceipt() {
             receiptModal.style.display = 'none';
             // Reset pilihan
@@ -1149,20 +1151,17 @@
             userIdInput.value = '';
             zoneIdInput.value = ''; 
             updateFooter();
-            // --- PERMINTAAN: JANGAN HAPUS URL PARAMETER ---
-            // history.pushState({}, '', window.location.pathname); // Baris ini tidak ditambahkan
         }
         closeReceiptModal.addEventListener('click', closeReceipt);
         closeReceiptButton.addEventListener('click', closeReceipt);
 
 
-        // --- Tutup modal jika klik di luar area (DIUBAH) ---
+        // (Tutup modal jika klik di luar area tidak berubah)
         window.addEventListener('click', (event) => {
             if (event.target == whatsappModal) {
                 whatsappModal.style.display = 'none';
             }
             if (event.target == qrisModal) {
-                // --- PERUBAHAN: Klik di luar = batalkan (kembali seperti semula) ---
                 cancelQrisPayment(); 
             }
             if (event.target == receiptModal) {
