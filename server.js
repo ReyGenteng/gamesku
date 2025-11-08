@@ -15,7 +15,7 @@ app.use('/api', gameRoutes);
 // Root endpoint
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Game Username Checker API',
+    message: 'Game Username Checker API - Deployed on Vercel',
     endpoints: {
       mobileLegends: '/api/ml?id={id}&server={server}',
       freeFire: '/api/ff?id={id}',
@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
         mobileLegends: '/api/ml?id=1114917746&server=13486',
         freeFire: '/api/ff?id=123456789'
       }
-    }
+    },
+    github: 'https://github.com/username/repo-name'
   });
 });
 
@@ -33,7 +34,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📝 Documentation: http://localhost:${PORT}`);
-});
+// Export untuk Vercel
+module.exports = app;
+
+// Local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📝 Documentation: http://localhost:${PORT}`);
+  });
+}
