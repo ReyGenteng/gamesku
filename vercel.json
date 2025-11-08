@@ -19,13 +19,5 @@
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ],
-  "functions": {
-    "api/ml.js": {
-      "maxDuration": 10
-    },
-    "api/ff.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
