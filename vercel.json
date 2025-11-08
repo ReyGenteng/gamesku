@@ -2,14 +2,30 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/public/$1"
     }
-  ]
+  ],
+  "functions": {
+    "api/ml.js": {
+      "maxDuration": 10
+    },
+    "api/ff.js": {
+      "maxDuration": 10
+    }
+  }
 }
