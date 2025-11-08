@@ -1,10 +1,7 @@
 # Game Username Checker API
 
-API untuk mengecek username game Mobile Legends dan Free Fire.
+🚀 **Deployed on Vercel**: https://gamesnowku.xyz
 
-## Cara Menjalankan
+## API Endpoints
 
-1. Clone repository ini
-2. Install dependencies:
-   ```bash
-   npm install
+### Mobile Legends
